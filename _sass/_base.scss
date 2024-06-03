@@ -231,7 +231,7 @@ header {
         color: white;
         opacity: 0;
         display: block;
-        background: rgba($theme-primary, .9);
+        background: rgba( $theme-primary, .9 );
         position: absolute;
         bottom: 0;
         text-align: center;
@@ -278,15 +278,6 @@ header {
     }
 }
 
-.project-image {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    display: block;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
 .call-to-action {
     h2 {
         margin: 0 auto 20px;
@@ -299,8 +290,8 @@ header {
 }
 
 .no-gutter > [class*='col-'] {
-    padding-right: 0;
-    padding-left: 0;
+    padding-right:0;
+    padding-left:0;
 }
 
 // Button Styles
@@ -357,3 +348,4 @@ img::-moz-selection {
 body {
     -webkit-tap-highlight-color: $theme-dark;
 }
+
