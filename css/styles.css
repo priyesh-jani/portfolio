@@ -1,4 +1,3 @@
-/* General Styles */
 body {
     font-family: 'Arial', sans-serif;
     color: #333;
@@ -29,7 +28,7 @@ body {
 
 /* Header Styles */
 .intro-header {
-    padding: 80px 0; /* Reduced padding to bring content up */
+    padding: 100px 0;
     color: #fff;
     background-size: cover;
     background-position: center;
@@ -47,10 +46,6 @@ body {
 }
 
 /* Blog Post Styles */
-.container {
-    padding-top: 30px; /* Adjusted top padding for better positioning */
-}
-
 .post-preview {
     margin-bottom: 30px;
 }
@@ -63,7 +58,7 @@ body {
 .post-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #000; /* Title color changed to black */
+    color: #007bff;
 }
 
 .post-subtitle {
@@ -87,9 +82,6 @@ footer {
     color: #fff;
     padding: 10px 0;
     text-align: center;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
 }
 
 footer p {
