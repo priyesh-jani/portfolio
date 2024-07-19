@@ -14,12 +14,12 @@ body {
 }
 
 #mainNav .navbar-brand {
-    color: #fff;
+    color: #000000;
     font-weight: bold;
 }
 
 #mainNav .navbar-nav > li > a {
-    color: #fff;
+    color: #000000;
     padding: 15px 20px;
 }
 
