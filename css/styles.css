@@ -1,47 +1,71 @@
 /* General Styles */
-html, body {
-    height: 100%;
-    margin: 0;
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    color: #e0e0e0;
-    background: url('https://raw.githubusercontent.com/priyesh-jani/portfolio/master/img/blog%20background.jpg') no-repeat center center fixed;
-    background-size: cover;
     margin: 0;
-    padding: 0;
+    font-family: 'Arial', sans-serif;
 }
 
 /* Navbar Styles */
 #mainNav {
-    background-color: rgba(33, 33, 33, 0.5); /* Semi-transparent background */
-    border: none;
+    position: fixed; /* Keeps the navbar at the top of the viewport */
+    top: 0;
+    width: 100%;
+    background-color: rgba(33, 33, 33, 0.7); /* Semi-transparent background */
+    color: #fff;
+    z-index: 1000; /* Ensures the navbar is above other content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds shadow for better visibility */
+    padding: 10px 0; /* Adjusts padding */
 }
 
-/* Navbar Brand */
+#mainNav .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Adjust width to match your layout */
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+#mainNav .navbar-header {
+    display: flex;
+    align-items: center;
+}
+
 #mainNav .navbar-brand {
-    color: #ff4d4d; /* Keeps text color visible against transparent background */
+    color: #ff4d4d; /* Your logo or brand text color */
     font-weight: bold;
+    text-decoration: none;
+    font-size: 1.5rem; /* Adjust font size */
 }
 
-/* Navbar Links */
-#mainNav .navbar-nav > li > a {
-    color: #ff4d4d; /* Keeps link text color visible */
-    padding: 15px 20px;
-    /* Optional: Add a transition for smoother hover effect */
-    transition: background-color 0.3s;
+#mainNav .navbar-nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
 }
 
-/* Navbar Links Hover Effect */
-#mainNav .navbar-nav > li > a:hover {
-    background-color: rgba(51, 51, 51, 0.8); /* Slightly transparent background on hover */
+#mainNav .navbar-nav .nav-item {
+    margin: 0 15px; /* Adjust spacing between items */
+}
+
+#mainNav .navbar-nav .nav-link {
+    color: #fff; /* Link color */
+    text-decoration: none;
+    font-size: 1rem; /* Adjust font size */
+    padding: 10px 15px;
+    transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effects */
+}
+
+#mainNav .navbar-nav .nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Background color on hover */
+    color: #ff4d4d; /* Text color on hover */
+    border-radius: 5px; /* Optional: rounded corners on hover */
 }
 
 /* Header Styles */
 .intro-header {
     padding: 50px 0; /* Adjust this padding if needed */
-    color: #36365f;
+    color: #fff;
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -57,13 +81,13 @@ body {
 
 .intro-header .subheading {
     font-size: 1.5rem;
-    color: #000000;
+    color: #e0e0e0;
 }
 
 /* Blog Post Styles */
 .post-preview {
     margin-bottom: 30px;
-    background: #36365f;
+    background: #36365f; /* Updated color */
     padding: 20px;
     border-radius: 8px;
     transition: transform 0.3s;
