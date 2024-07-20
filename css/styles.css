@@ -7,7 +7,7 @@ html, body {
 body {
     font-family: 'Arial', sans-serif;
     color: #e0e0e0;
-    background: url('https://github.com/priyesh-jani/portfolio/blob/master/img/blog%20background.jpg') no-repeat center center fixed;
+    background: url('https://raw.githubusercontent.com/priyesh-jani/portfolio/master/img/blog%20background.jpg') no-repeat center center fixed;
     background-size: cover;
     margin: 0;
     padding: 0;
