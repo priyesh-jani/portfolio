@@ -1,24 +1,17 @@
 /* General Styles */
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     color: #e0e0e0;
-    background: linear-gradient(135deg, #FAF9F6 0%, #0d0d0d 100%);
+    background: url('https://github.com/priyesh-jani/portfolio/blob/master/img/blog%20background.jpg') no-repeat center center fixed;
+    background-size: cover;
     margin: 0;
     padding: 0;
     overflow: hidden; /* To ensure the body doesn't scroll */
-}
-
-/* Adding animation */
-@keyframes gradientBackground {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-body {
-    background: linear-gradient(-45deg, #1a1a1a, #2c2c2c, #1a1a1a, #0d0d0d);
-    background-size: 400% 400%;
-    animation: gradientBackground 15s ease infinite;
 }
 
 /* Navbar Styles */
@@ -106,6 +99,9 @@ hr {
 
 /* Footer Styles */
 footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
     background-color: #212121;
     color: #ff4d4d;
     padding: 10px 0;
