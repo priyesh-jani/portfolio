@@ -62,6 +62,95 @@ body {
     border-radius: 5px; /* Optional: rounded corners on hover */
 }
 
+/* Additional Navbar Styles from New Code */
+.navbar-default {
+    background-color: rgba(33, 33, 33, 0.7); /* Match existing semi-transparent background */
+    border-color: rgba(33, 33, 33, 0.7); /* Match existing border color */
+    font-family: 'Arial', sans-serif; /* Ensuring font consistency */
+    transition: all 0.3s; /* Smooth transition for background and border color changes */
+}
+
+.navbar-header .navbar-brand {
+    color: #ff4d4d; /* Brand color */
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.navbar-header .navbar-brand:hover,
+.navbar-header .navbar-brand:focus {
+    color: darken(#ff4d4d, 10%);
+}
+
+.nav {
+    display: flex;
+}
+
+.nav > li > a,
+.nav > li > a:focus {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 13px;
+    color: #fff;
+}
+
+.nav > li > a:hover {
+    color: #ff4d4d;
+}
+
+.nav > li.active > a,
+.nav > li.active > a:focus {
+    color: #ff4d4d !important;
+    background-color: transparent;
+}
+
+@media (min-width: 768px) {
+    #mainNav {
+        background-color: transparent;
+    }
+
+    .navbar-header .navbar-brand {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .navbar-header .navbar-brand:hover,
+    .navbar-header .navbar-brand:focus {
+        color: white;
+    }
+
+    .nav > li > a,
+    .nav > li > a:focus {
+        color: rgba(255, 255, 255, 0.7);
+    }
+
+    .nav > li > a:hover {
+        color: white;
+    }
+
+    .affix {
+        background-color: #fff;
+        border-color: rgba(33, 33, 33, 0.7);
+    }
+
+    .affix .navbar-header .navbar-brand {
+        color: #ff4d4d;
+        font-size: 14px;
+    }
+
+    .affix .navbar-header .navbar-brand:hover,
+    .affix .navbar-header .navbar-brand:focus {
+        color: darken(#ff4d4d, 10%);
+    }
+
+    .affix .nav > li > a,
+    .affix .nav > li > a:focus {
+        color: #33, 33, 33;
+    }
+
+    .affix .nav > li > a:hover {
+        color: #ff4d4d;
+    }
+}
+
 /* Header Styles */
 .intro-header {
     padding: 50px 0; /* Adjust this padding if needed */
