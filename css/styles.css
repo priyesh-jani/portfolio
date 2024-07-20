@@ -14,12 +14,12 @@ body {
 }
 
 #mainNav .navbar-brand {
-    color: #000000;
+    color: #fff;
     font-weight: bold;
 }
 
 #mainNav .navbar-nav > li > a {
-    color: #000000;
+    color: #fff;
     padding: 15px 20px;
 }
 
@@ -30,7 +30,7 @@ body {
 /* Header Styles */
 .intro-header {
     padding: 100px 0;
-    color: #fff;
+    color: #000;
     background-size: cover;
     background-position: center;
     text-align: center;
