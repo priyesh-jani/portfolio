@@ -29,7 +29,7 @@ body {
 
 /* Header Styles */
 .intro-header {
-    padding: 100px 0;
+    padding: 50px 0; /* Reduced from 100px to 50px */
     color: #fff;
     background: linear-gradient(135deg, #2b2b2b 0%, #1c1c1c 100%);
     background-size: cover;
