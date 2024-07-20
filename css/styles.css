@@ -1,36 +1,37 @@
 /* General Styles */
 body {
     font-family: 'Arial', sans-serif;
-    color: #333;
-    background-color: #f8f9fa;
+    color: #e0e0e0;
+    background-color: #1a1a1a;
     margin: 0;
     padding: 0;
 }
 
 /* Navbar Styles */
 #mainNav {
-    background-color: #343a40;
+    background-color: #212121;
     border: none;
 }
 
 #mainNav .navbar-brand {
-    color: #fff;
+    color: #00d4ff;
     font-weight: bold;
 }
 
 #mainNav .navbar-nav > li > a {
-    color: #fff;
+    color: #00d4ff;
     padding: 15px 20px;
 }
 
 #mainNav .navbar-nav > li > a:hover {
-    background-color: #495057;
+    background-color: #333;
 }
 
 /* Header Styles */
 .intro-header {
     padding: 100px 0;
-    color: #000;
+    color: #fff;
+    background: linear-gradient(135deg, #2b2b2b 0%, #1c1c1c 100%);
     background-size: cover;
     background-position: center;
     text-align: center;
@@ -40,47 +41,59 @@ body {
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
+    color: #00d4ff;
+    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
 }
 
 .intro-header .subheading {
     font-size: 1.5rem;
+    color: #a0a0a0;
 }
 
 /* Blog Post Styles */
 .post-preview {
     margin-bottom: 30px;
+    background: #252525;
+    padding: 20px;
+    border-radius: 8px;
+    transition: transform 0.3s;
+}
+
+.post-preview:hover {
+    transform: scale(1.02);
 }
 
 .post-preview a {
     text-decoration: none;
-    color: #333;
+    color: #00d4ff;
 }
 
 .post-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #007bff;
+    color: #00d4ff;
+    text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
 }
 
 .post-subtitle {
     font-size: 1.25rem;
-    color: #6c757d;
+    color: #a0a0a0;
 }
 
 .post-meta {
     font-size: 0.875rem;
-    color: #6c757d;
+    color: #a0a0a0;
 }
 
 hr {
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid #333;
     margin: 20px 0;
 }
 
 /* Footer Styles */
 footer {
-    background-color: #343a40;
-    color: #fff;
+    background-color: #212121;
+    color: #00d4ff;
     padding: 10px 0;
     text-align: center;
 }
