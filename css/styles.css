@@ -14,12 +14,12 @@ body {
 }
 
 #mainNav .navbar-brand {
-    color: #00d4ff;
+    color: #ff4d4d;
     font-weight: bold;
 }
 
 #mainNav .navbar-nav > li > a {
-    color: #00d4ff;
+    color: #ff4d4d;
     padding: 15px 20px;
 }
 
@@ -41,8 +41,8 @@ body {
     font-size: 3rem;
     font-weight: bold;
     margin-bottom: 0.5rem;
-    color: #00d4ff;
-    text-shadow: 0 0 10px rgba(0, 212, 255, 0.5);
+    color: #ff4d4d;
+    text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
 }
 
 .intro-header .subheading {
@@ -65,14 +65,14 @@ body {
 
 .post-preview a {
     text-decoration: none;
-    color: #00d4ff;
+    color: #ff4d4d;
 }
 
 .post-title {
     font-size: 2rem;
     font-weight: bold;
-    color: #00d4ff;
-    text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+    color: #ff4d4d;
+    text-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
 }
 
 .post-subtitle {
@@ -93,7 +93,7 @@ hr {
 /* Footer Styles */
 footer {
     background-color: #212121;
-    color: #00d4ff;
+    color: #ff4d4d;
     padding: 10px 0;
     text-align: center;
 }
