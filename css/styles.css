@@ -2,9 +2,23 @@
 body {
     font-family: 'Arial', sans-serif;
     color: #e0e0e0;
-    background-color: #1a1a1a;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
     margin: 0;
     padding: 0;
+    overflow: hidden; /* To ensure the body doesn't scroll */
+}
+
+/* Adding animation */
+@keyframes gradientBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    background: linear-gradient(-45deg, #1a1a1a, #2c2c2c, #1a1a1a, #0d0d0d);
+    background-size: 400% 400%;
+    animation: gradientBackground 15s ease infinite;
 }
 
 /* Navbar Styles */
