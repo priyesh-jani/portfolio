@@ -15,7 +15,7 @@ body {
 
 /* Navbar Styles */
 #mainNav {
-    background-color: #212121;
+    background-color: rgba(33, 33, 33, 0.5);
     border: none;
 }
 
