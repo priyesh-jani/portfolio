@@ -15,22 +15,27 @@ body {
 
 /* Navbar Styles */
 #mainNav {
-    background-color: rgba(33, 33, 33, 0.5);
+    background-color: rgba(33, 33, 33, 0.5); /* Semi-transparent background */
     border: none;
 }
 
+/* Navbar Brand */
 #mainNav .navbar-brand {
-    color: #ff4d4d;
+    color: #ff4d4d; /* Keeps text color visible against transparent background */
     font-weight: bold;
 }
 
+/* Navbar Links */
 #mainNav .navbar-nav > li > a {
-    color: #ff4d4d;
+    color: #ff4d4d; /* Keeps link text color visible */
     padding: 15px 20px;
+    /* Optional: Add a transition for smoother hover effect */
+    transition: background-color 0.3s;
 }
 
+/* Navbar Links Hover Effect */
 #mainNav .navbar-nav > li > a:hover {
-    background-color: #333;
+    background-color: rgba(51, 51, 51, 0.8); /* Slightly transparent background on hover */
 }
 
 /* Header Styles */
