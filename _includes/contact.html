@@ -1,33 +1,33 @@
 <section id="contact">
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
+            <div class="col-lg-6 text-center">
                 <h2 class="section-heading">Let's Get In Touch!</h2>
                 <hr class="primary">
                 <p>Ready to turn your vision into reality? Fantastic! Send me an email, and let's bring your project to life together!</p>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <a href="https://www.linkedin.com/in/priyesh-jani/">
+                            <i class="fa fa-linkedin fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                            <p>{{https://www.linkedin.com/in/priyesh-jani/}}</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="mailto:priyeshjani5@gmail.com">
+                            <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                            <p>{{ site.email }}</p>
+                        </a>
+                    </div>
+                    <div class="col-lg-4">
+                        <a href="https://github.com/priyesh-jani">
+                            <i class="fa fa-github fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                            <p>{{https://github.com/priyesh-jani}}</p>
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-2 col-lg-offset-2 text-center">
-                <a href="https://www.linkedin.com/in/priyesh-jani/">
-                    <i class="fa fa-linkedin fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p>{{https://www.linkedin.com/in/priyesh-jani/}}</p>
-                </a>
-            </div>
-            <div class="col-lg-2 col-lg-offset-1 text-center">
-                <a href="mailto:priyeshjani5@gmail.com">
-                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p>{{ site.email }}</p>
-                </a>
-            </div>
-            <div class="col-lg-2 col-lg-offset-1 text-center">
-                <a href="https://github.com/priyesh-jani">
-                    <i class="fa fa-github fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p>{{https://github.com/priyesh-jani}}</p>
-                </a>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 text-center">
-                <form id="contact-form" action="https://formspree.io/f/xanwqqee" method="POST">
+            <div class="col-lg-6">
+                <form id="contact-form" action="https://formspree.io/f/{your_form_id}" method="POST">
                     <div class="form-group">
                         <label for="name">Name:</label>
                         <input type="text" id="name" name="name" class="form-control" required>
