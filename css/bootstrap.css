@@ -6583,15 +6583,17 @@ button.close {
 
 .intro-header .subheading {
     font-size: 1.5rem;
-    color: #e0e0e0;
+    font-weight: bold;
+    color: #000000;
 }
 
 /* Blog Post Styles */
 .post-preview {
     margin-bottom: 30px;
-    background: #36365f; /* Updated color */
+    background: #f5f5f5; /* Website background color */
     padding: 20px;
     border-radius: 8px;
+    border: 2px solid #36365f; /* Border color */
     transition: transform 0.3s;
 }
 
@@ -6613,7 +6615,8 @@ button.close {
 
 .post-subtitle {
     font-size: 1.25rem;
-    color: #a0a0a0;
+    font-weight: bold;
+    color: #000000;
 }
 
 .post-meta {
