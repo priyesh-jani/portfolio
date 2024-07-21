@@ -6578,7 +6578,6 @@ button.close {
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: #ff4d4d;
-    text-shadow: 0 0 10px rgba(255, 77, 77, 0.5);
 }
 
 .intro-header .subheading {
@@ -6610,7 +6609,6 @@ button.close {
     font-size: 2rem;
     font-weight: bold;
     color: #ff4d4d;
-    text-shadow: 0 0 5px rgba(255, 77, 77, 0.5);
 }
 
 .post-subtitle {
