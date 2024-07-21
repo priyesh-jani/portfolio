@@ -13,7 +13,7 @@ body {
     color: #fff;
     z-index: 1000; /* Ensures the navbar is above other content */
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Adds shadow for better visibility */
-    height: 60px; /* Adjust height to match desired layout */
+    height: 30px; /* Adjust height to match desired layout */
     display: flex;
     align-items: center;
 }
