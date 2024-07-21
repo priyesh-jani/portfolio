@@ -17,8 +17,8 @@ body {
 }
 
 #mainNav .container {
-    display: grid;
-    grid-template-columns: auto 1fr auto;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
     max-width: 1200px; /* Adjust width to match your layout */
     margin: 0 auto;
@@ -42,7 +42,6 @@ body {
     margin: 0;
     padding: 0;
     display: flex;
-    justify-content: flex-end;
 }
 
 #mainNav .navbar-nav .nav-item {
@@ -144,7 +143,7 @@ body {
 
     .affix .nav > li > a,
     .affix .nav > li > a:focus {
-        color: #33, 33, 33;
+        color: #333;
     }
 
     .affix .nav > li > a:hover {
