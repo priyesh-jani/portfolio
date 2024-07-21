@@ -6,24 +6,45 @@
                 <hr class="primary">
                 <p>Ready to turn your vision into reality? Fantastic! Send me an email, and let's bring your project to life together!</p>
             </div>
-        <div class="col-lg-2 col-lg-offset-2 text-center">
-            <a href="https://www.linkedin.com/in/priyesh-jani/">
-                <i class="fa fa-linkedin fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p>{{https://www.linkedin.com/in/priyesh-jani/}}</p>
-            </a>
+            <div class="col-lg-2 col-lg-offset-2 text-center">
+                <a href="https://www.linkedin.com/in/priyesh-jani/">
+                    <i class="fa fa-linkedin fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p>{{https://www.linkedin.com/in/priyesh-jani/}}</p>
+                </a>
+            </div>
+            <div class="col-lg-2 col-lg-offset-1 text-center">
+                <a href="mailto:priyeshjani5@gmail.com">
+                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p>{{ site.email }}</p>
+                </a>
+            </div>
+            <div class="col-lg-2 col-lg-offset-1 text-center">
+                <a href="https://github.com/priyesh-jani">
+                    <i class="fa fa-github fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p>{{https://github.com/priyesh-jani}}</p>
+                </a>
+            </div>
         </div>
-        <div class="col-lg-2 col-lg-offset-1 text-center">
-            <a href="mailto:priyeshjani5@gmail.com">
-            <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p>{{ site.email }}</p>
-            </a>
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 text-center">
+                <form id="contact-form" action="contact.php" method="post">
+                    <div class="form-group">
+                        <label for="name">Name:</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="number">Phone Number:</label>
+                        <input type="tel" id="number" name="number" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="col-lg-2 col-lg-offset-1 text-center">
-            <a href="https://github.com/priyesh-jani">
-            <i class="fa fa-github fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                <p>{{https://github.com/priyesh-jani}}</p>
-            </a>
-        </div>
-
     </div>
 </section>
