@@ -77,20 +77,28 @@
 
         figure {
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
+            margin: 20px 0; /* Adjust as needed */
         }
 
         figure img {
-            max-width: 100%;
+            max-width: 80%;
             height: auto;
-            width: 50%; /* Adjust the width as needed */
+        }
+
+        .reference-link {
+            align-self: flex-end;
+            margin-top: 5px;
+            margin-bottom: 10px;
         }
 
         figure figcaption {
             margin-top: 10px;
             color: #666;
             font-size: 14px;
+            max-width: 80%; /* Adjust as needed */
         }
     </style>
 </head>
@@ -137,7 +145,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <article class="post-content">
-                    <p class="post-meta">Posted by Priyesh Jani on July 7, 2024</p>
+                    <p class="post-meta">Posted by Priyesh Jani on August 3, 2024</p>
                     <p>The world of SEO is buzzing with excitement as AI technology takes center stage, transforming how we optimize content and rank in search results. This isn't some far-off sci-fi fantasy; it's happening right now and will continue to shape SEO strategies in the coming years.</p>
 
                     <h2>The Shifting Search Paradigm</h2>
@@ -155,7 +163,8 @@
                     <p>AI is revolutionizing the search landscape. As per chart below, Bing's ChatGPT integration has boosted its market share to over 10% in 2023 (right chart in the image below), while Google's dominance, though slightly diminished, remains strong at 91.7% of the global search engine market (left chart in the image below). This shift underscores AI's increasing importance in search technology.</p>
                     
                     <figure>
-                        <img src="img/shareofmarket.jpg" alt="Search Engine Market Share">
+                        <img src="portfolio/img/shareofmarket.jpg" alt="Search Engine Market Share">
+                        <a href="https://www.statista.com/statistics/216573/worldwide-market-share-of-search-engines/" class="reference-link">(statists,2024)</a>
                         <figcaption>Bing's market share boosted by ChatGPT integration; Google's dominance remains strong.</figcaption>
                     </figure>
 
@@ -192,15 +201,8 @@
             </div>
         </div>
     </div>
-
     <footer>
-        <div class="container">
-            <p>&copy; Priyesh Jani 2024. All Rights Reserved.</p>
-        </div>
+        <p>&copy; Priyesh Jani 2024. All Rights Reserved.</p>
     </footer>
-
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script>
 </body>
 </html>
