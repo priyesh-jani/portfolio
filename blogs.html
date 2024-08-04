@@ -35,6 +35,30 @@
             color: #F05F40; /* Same hover color as main page */
         }
 
+        /* Additional styles for mobile menu */
+        .menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+                cursor: pointer;
+                font-size: 24px;
+                color: #F05F40;
+            }
+
+            .navbar-collapse {
+                display: none;
+            }
+
+            .navbar-collapse.show {
+                display: block;
+            }
+        }
     </style>
 </head>
 
@@ -72,6 +96,9 @@
                         <a class="page-scroll" href="index.html#contact">CONTACT</a>
                     </li>
                 </ul>
+                <div class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -161,6 +188,12 @@
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script>
+        // JavaScript to toggle the mobile menu
+        document.querySelector('.menu-btn').addEventListener('click', function() {
+            document.querySelector('.navbar-collapse').classList.toggle('show');
+        });
+    </script>
 </body>
 
 </html>
