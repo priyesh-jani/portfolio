@@ -117,21 +117,11 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    <li>
-                        <a class="page-scroll" href="index.html#about">ABOUT</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="blogs.html">BLOGS</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="index.html#services">SERVICES</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="index.html#portfolio">PORTFOLIO</a>
-                    </li>
-                    <li>
-                        <a class="page-scroll" href="index.html#contact">CONTACT</a>
-                    </li>
+                    <li><a class="page-scroll" href="index.html#about">ABOUT</a></li>
+                    <li><a class="page-scroll" href="blogs.html">BLOGS</a></li>
+                    <li><a class="page-scroll" href="index.html#services">SERVICES</a></li>
+                    <li><a class="page-scroll" href="index.html#portfolio">PORTFOLIO</a></li>
+                    <li><a class="page-scroll" href="index.html#contact">CONTACT</a></li>
                 </ul>
                 <div class="menu-btn">
                     <i class="fas fa-bars"></i>
@@ -161,6 +151,41 @@
         <button id="send-button">Send</button>
     </div>
 
-    <script src="script.js"></script>
+    <script>
+        const chatBox = document.getElementById('chat-box');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('send-button');
+
+        // Function to send a question to the server and receive an answer
+        async function sendQuestion() {
+            const userQuestion = userInput.value.trim();
+            if (userQuestion) {
+                // Append user question to chat box
+                chatBox.innerHTML += `<div><strong>You:</strong> ${userQuestion}</div>`;
+                userInput.value = ''; // Clear input field
+
+                // Send request to Flask backend
+                const response = await fetch(`/ask/${encodeURIComponent(userQuestion)}`);
+                const data = await response.json();
+                const answer = data.answer;
+
+                // Append chatbot answer to chat box
+                chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${answer}</div>`;
+                
+                // Scroll to the bottom of the chat box
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+        }
+
+        // Event listener for the send button
+        sendButton.addEventListener('click', sendQuestion);
+
+        // Event listener for pressing Enter key
+        userInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                sendQuestion();
+            }
+        });
+    </script>
 </body>
 </html>
