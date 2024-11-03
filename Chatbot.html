@@ -4,9 +4,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatbot</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        /* Ensure consistent navbar styles */
+        .navbar-default {
+            background-color: white; /* Same background color as main page */
+            border-color: rgba(34, 34, 34, 0.5); /* Same border color as main page */
+        }
+
+        .navbar-header .navbar-brand {
+            color: #F05F40; /* Orange color */
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .navbar-header .navbar-brand:hover,
+        .navbar-header .navbar-brand:focus {
+            color: #F05F40; /* Adjust hover color */
+        }
+
+        .nav > li > a {
+            color: #F05F40; /* Same color as main page */
+        }
+
+        .nav > li > a:hover,
+        .nav > li > a:focus {
+            color: #F05F40; /* Same hover color as main page */
+        }
+
+        /* Additional styles for mobile menu */
+        .menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+                cursor: pointer;
+                font-size: 24px;
+                color: #F05F40;
+            }
+            .navbar-collapse {
+                display: none;
+            }
+            .navbar-collapse.show {
+                display: block;
+            }
+        }
+
+        /* Chatbot Styles */
+        body {
+            background-color: #f8f9fa; /* Light background for chatbot */
+            font-family: Arial, sans-serif; /* Font for the body */
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 50px auto; /* Centered container */
+            border: 1px solid #ccc; /* Border around the chatbox */
+            border-radius: 8px; /* Rounded corners */
+            background-color: white; /* White background for chatbox */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            padding: 20px; /* Padding for chatbox */
+        }
+
+        .chat-box {
+            height: 300px; /* Height for chat area */
+            overflow-y: auto; /* Enable scrolling */
+            border: 1px solid #ddd; /* Light border */
+            border-radius: 4px; /* Rounded corners */
+            padding: 10px; /* Padding inside the chatbox */
+            margin-bottom: 10px; /* Space between chatbox and input */
+        }
+
+        #user-input {
+            width: calc(100% - 90px); /* Width of input */
+            padding: 10px; /* Padding for input */
+            border: 1px solid #ccc; /* Border for input */
+            border-radius: 4px; /* Rounded corners */
+            margin-right: 10px; /* Space between input and button */
+        }
+
+        #send-button {
+            padding: 10px 20px; /* Padding for button */
+            background-color: #F05F40; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        #send-button:hover {
+            background-color: #d0543a; /* Darker button color on hover */
+        }
+    </style>
 </head>
 <body>
+    <!-- Navigation Bar -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">Priyesh Jani</a>
+            </div>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="index.html#about">ABOUT</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="blogs.html">BLOGS</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#services">SERVICES</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#portfolio">PORTFOLIO</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#contact">CONTACT</a>
+                    </li>
+                </ul>
+                <div class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="intro-header" style="background-image: url('img/chat-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Chatbot</h1>
+                        <hr class="small">
+                        <span class="subheading" style="margin-bottom: 10px;">Ask me anything!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
         <input type="text" id="user-input" placeholder="Ask me anything...">
