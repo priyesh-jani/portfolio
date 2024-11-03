@@ -5,7 +5,7 @@ document.getElementById('send-button').addEventListener('click', function() {
         userMessage.textContent = "You: " + userInput;
         document.getElementById('chat-box').appendChild(userMessage);
         
-        fetch('/ask', {
+        fetch('https://<your-replit-url>/ask', {  // Replace with your Replit URL
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -24,3 +24,4 @@ document.getElementById('send-button').addEventListener('click', function() {
         });
     }
 });
+
