@@ -1,64 +1,38 @@
-<script>
-    const chatBox = document.getElementById('chat-box');
-    const userInput = document.getElementById('user-input');
-    const sendButton = document.getElementById('send-button');
+document.getElementById("send-button").addEventListener("click", sendQuestion);
 
-    // Function to send a predefined question
-    function sendPredefinedQuestion(question) {
-        chatBox.innerHTML += `<div><strong>You:</strong> ${question}</div>`;
-        userInput.value = ''; // Clear input field
-        sendQuestion(question); // Call sendQuestion with the predefined question
-    }
+async function sendQuestion() {
+    const question = document.getElementById("user-input").value;
+    if (question.trim() === "") return;
 
-    // Function to send a question to the server and receive an answer
-    async function sendQuestion(userQuestion) {
-        if (userQuestion) {
-            try {
-                console.log('Sending question:', userQuestion); // Log the question being sent
+    const chatBox = document.getElementById("chat-box");
+    chatBox.innerHTML += `<p><strong>You:</strong> ${question}</p>`;
 
-                // Send request to Flask backend (update this URL for production)
-                const response = await fetch(`https://portfolio-nqpj.onrender.com/get_response`, {
-                    method: 'POST', 
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ question: userQuestion }) // Send question as JSON
-                });
+    try {
+        const response = await fetch("https://<your-replit-username>.repl.co/ask", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ question: question })
+        });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    console.log('Received response:', data); // Log the response
-
-                    if (data.answer) {
-                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${data.answer}</div>`;
-                    } else {
-                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> Sorry, I couldn't understand that.</div>`;
-                    }
-                    chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
-                } else {
-                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> Sorry, I couldn't understand that.</div>`;
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                chatBox.innerHTML += `<div><strong>Chatbot:</strong> An error occurred. Please try again.</div>`;
+        // Check if the response is okay
+        if (response.ok) {
+            const data = await response.json();
+            // Check if the answer field exists in the response
+            if (data.answer) {
+                chatBox.innerHTML += `<p><strong>Bot:</strong> ${data.answer}</p>`;
+            } else {
+                chatBox.innerHTML += `<p><strong>Bot:</strong> Sorry, I couldn't find an answer.</p>`;
             }
+        } else {
+            chatBox.innerHTML += `<p><strong>Bot:</strong> Sorry, there was an issue with your request.</p>`;
         }
+    } catch (error) {
+        chatBox.innerHTML += `<p><strong>Bot:</strong> Sorry, I couldn't connect to the server.</p>`;
     }
 
-    // Event listener for sending input
-    sendButton.addEventListener('click', () => {
-        const userQuestion = userInput.value.trim(); // Trim whitespace
-        if (userQuestion) {
-            chatBox.innerHTML += `<div><strong>You:</strong> ${userQuestion}</div>`;
-            sendQuestion(userQuestion); // Call function to send question
-            userInput.value = ''; // Clear input field
-        }
-    });
-
-    // Allow pressing 'Enter' to send the question
-    userInput.addEventListener('keypress', (event) => {
-        if (event.key === 'Enter') {
-            sendButton.click(); // Trigger the click event of the send button
-        }
-    });
-</script>
+    // Scroll to the bottom of the chat box and clear the input
+    chatBox.scrollTop = chatBox.scrollHeight;
+    document.getElementById("user-input").value = "";
+}
