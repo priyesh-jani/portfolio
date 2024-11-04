@@ -32,41 +32,47 @@
             color: #F05F40; /* Same hover color as main page */
         }
 
+        /* Additional styles for mobile menu */
+        .menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+                cursor: pointer;
+                font-size: 24px;
+                color: #F05F40;
+            }
+            .navbar-collapse {
+                display: none;
+            }
+            .navbar-collapse.show {
+                display: block;
+            }
+        }
+
         /* Chatbot Styles */
         body {
             background-color: #f8f9fa; /* Light background for chatbot */
             font-family: Arial, sans-serif; /* Font for the body */
-            margin: 0; /* Remove default margin */
-        }
-
-        .container {
-            display: flex; /* Flexbox layout for the main container */
-            height: 100vh; /* Full viewport height */
-        }
-
-        .question-list {
-            flex: 1; /* Take half of the viewport width */
-            padding: 20px; /* Padding for question list */
-            background-color: white; /* Background color for question area */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-            border-radius: 8px; /* Rounded corners */
-            overflow-y: auto; /* Scroll if content overflows */
-            height: 100%; /* Full height */
         }
 
         .chat-container {
-            flex: 1; /* Take the other half of the viewport width */
-            padding: 20px; /* Padding for chat container */
-            background-color: #ffffff; /* White background for chat area */
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            max-width: 600px;
+            margin: 50px auto; /* Centered container */
+            border: 1px solid #ccc; /* Border around the chatbox */
             border-radius: 8px; /* Rounded corners */
-            position: relative; /* For positioning chat elements */
-            overflow: hidden; /* Prevent overflow */
-            height: 100%; /* Full height */
+            background-color: white; /* White background for chatbox */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            padding: 20px; /* Padding for chatbox */
         }
 
         .chat-box {
-            height: calc(100% - 60px); /* Height for chat area minus input area */
+            height: 300px; /* Height for chat area */
             overflow-y: auto; /* Enable scrolling */
             border: 1px solid #ddd; /* Light border */
             border-radius: 4px; /* Rounded corners */
@@ -80,7 +86,6 @@
             border: 1px solid #ccc; /* Border for input */
             border-radius: 4px; /* Rounded corners */
             margin-right: 10px; /* Space between input and button */
-            box-sizing: border-box; /* Include padding in width calculation */
         }
 
         #send-button {
@@ -95,23 +100,6 @@
         #send-button:hover {
             background-color: #d0543a; /* Darker button color on hover */
         }
-
-        .question-list button {
-            display: block;
-            margin: 5px 0; /* Space between buttons */
-            padding: 10px;
-            width: 100%; /* Full width buttons */
-            background-color: #F05F40; /* Button color */
-            color: white; /* Button text color */
-            border: none; /* No border */
-            border-radius: 4px; /* Rounded corners */
-            cursor: pointer; /* Pointer cursor on hover */
-        }
-
-        .question-list button:hover {
-            background-color: #d0543a; /* Darker button color on hover */
-        }
-
     </style>
 </head>
 <body>
@@ -146,7 +134,7 @@
     <header class="intro-header" style="background-image: url('img/chat-bg.jpg')">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 col-md-10 col-md-offset-1">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
                         <h1>Discover My Professional Path: Ask Away!</h1>
                         <hr class="small">
@@ -157,20 +145,10 @@
         </div>
     </header>
 
-    <div class="container">
-        <div class="question-list">
-            <h3>Select a Question:</h3>
-            <button onclick="sendPredefinedQuestion('What is your experience in data analytics?')">What is your experience in data analytics?</button>
-            <button onclick="sendPredefinedQuestion('How did you transition from petroleum engineering to data analytics?')">How did you transition from petroleum engineering to data analytics?</button>
-            <button onclick="sendPredefinedQuestion('What tools do you use for data analysis?')">What tools do you use for data analysis?</button>
-            <button onclick="sendPredefinedQuestion('What advice do you have for someone starting in data analytics?')">What advice do you have for someone starting in data analytics?</button>
-        </div>
-        
-        <div class="chat-container">
-            <div class="chat-box" id="chat-box"></div>
-            <input type="text" id="user-input" placeholder="Ask me anything...">
-            <button id="send-button">Send</button>
-        </div>
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <input type="text" id="user-input" placeholder="Ask me anything...">
+        <button id="send-button">Send</button>
     </div>
 
     <script>
@@ -178,56 +156,52 @@
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
 
-        // Function to send a predefined question
-        function sendPredefinedQuestion(question) {
-            chatBox.innerHTML += `<div><strong>You:</strong> ${question}</div>`;
-            userInput.value = ''; // Clear input field
-            sendQuestion(question); // Call sendQuestion with the predefined question
-        }
-
         // Function to send a question to the server and receive an answer
-        async function sendQuestion(userQuestion) {
+        async function sendQuestion() {
+            const userQuestion = userInput.value.trim();
             if (userQuestion) {
+                // Append user question to chat box
+                chatBox.innerHTML += <div><strong>You:</strong> ${userQuestion}</div>;
+                userInput.value = ''; // Clear input field
+
                 try {
                     // Send request to Flask backend (update this URL for production)
-                    const response = await fetch(`https://portfolio-nqpj.onrender.com/get_response`, {
-                        method: 'POST', 
+                    const response = await fetch(https://portfolio-nqpj.onrender.com/get_response, {
+                        method: 'POST', // Ensure you're using POST method
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'application/json',
                         },
-                        body: JSON.stringify({ question: userQuestion })
+                        body: JSON.stringify({ question: userQuestion }) // Send question as JSON
                     });
 
                     if (response.ok) {
                         const data = await response.json();
-                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${data.answer}</div>`;
+                        const answer = data.response; // Get the response from the server
+
+                        // Append chatbot answer to chat box
+                        chatBox.innerHTML += <div><strong>Chatbot:</strong> ${answer}</div>;
+                        
+                        // Scroll to the bottom of the chat box
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
-                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> Sorry, I couldn't understand that.</div>`;
+                        const errorMessage = await response.text();
+                        chatBox.innerHTML += <div><strong>Chatbot:</strong> There was an error communicating with the server: ${errorMessage}</div>;
                     }
                 } catch (error) {
-                    console.error('Error:', error);
-                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> An error occurred. Please try again.</div>`;
+                    chatBox.innerHTML += <div><strong>Chatbot:</strong> There was an error communicating with the server: ${error.message}</div>;
                 }
             }
         }
 
-        // Event listener for sending input
-        sendButton.addEventListener('click', () => {
-            const userQuestion = userInput.value;
-            chatBox.innerHTML += `<div><strong>You:</strong> ${userQuestion}</div>`;
-            sendQuestion(userQuestion); // Call function to send question
-            userInput.value = ''; // Clear input field
-        });
+        // Event listener for the send button
+        sendButton.addEventListener('click', sendQuestion);
 
-        // Allow pressing 'Enter' to send the question
-        userInput.addEventListener('keypress', (event) => {
+        // Event listener for pressing Enter key
+        userInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
-                sendButton.click(); // Trigger the click event of the send button
+                sendQuestion();
             }
         });
     </script>
-    <script src="https://use.fontawesome.com/8b27923a7c.js"></script>
-    <script src="js/bootstrap.js"></script>
 </body>
 </html>
