@@ -147,7 +147,7 @@
 
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
-        <input type="text" id="user-input" placeholder="Ask me anything..." autocomplete="off">
+        <input type="text" id="user-input" placeholder="Ask me anything...">
         <button id="send-button">Send</button>
     </div>
 
@@ -164,28 +164,32 @@
                 chatBox.innerHTML += `<div><strong>You:</strong> ${userQuestion}</div>`;
                 userInput.value = ''; // Clear input field
 
-                // Send request to Flask backend
-                const response = await fetch('/get_response', { // Make sure this matches your Flask route
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ question: userQuestion })
-                });
+                try {
+                    // Send request to Flask backend (update the port to 5002)
+                    const response = await fetch(`http://127.0.0.1:5002/get_response`, {
+                        method: 'POST', // Ensure you're using POST method
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ question: userQuestion }) // Send question as JSON
+                    });
 
-                // Handle the response
-                if (response.ok) {
-                    const data = await response.json();
-                    const answer = data.response || "Sorry, I didn't understand that.";
+                    if (response.ok) {
+                        const data = await response.json();
+                        const answer = data.response; // Get the response from the server
 
-                    // Append chatbot answer to chat box
-                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${answer}</div>`;
-                } else {
-                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> There was an error communicating with the server.</div>`;
+                        // Append chatbot answer to chat box
+                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${answer}</div>`;
+                        
+                        // Scroll to the bottom of the chat box
+                        chatBox.scrollTop = chatBox.scrollHeight;
+                    } else {
+                        const errorMessage = await response.text();
+                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> There was an error communicating with the server: ${errorMessage}</div>`;
+                    }
+                } catch (error) {
+                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> There was an error communicating with the server: ${error.message}</div>`;
                 }
-                
-                // Scroll to the bottom of the chat box
-                chatBox.scrollTop = chatBox.scrollHeight;
             }
         }
 
