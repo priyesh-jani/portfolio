@@ -10,7 +10,7 @@ CORS(app)  # Enable CORS for all routes
 
 # Load the JSON file containing questions and answers
 try:
-    with open(r"C:\Users\15732\OneDrive\Desktop\questions_and_answers.json", "r") as file:
+    with open(r"questions_and_answers.json", "r") as file:
         data = json.load(file)
 except FileNotFoundError:
     print("Error: 'questions_and_answers.json' file not found.")
