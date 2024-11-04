@@ -165,8 +165,8 @@
                 userInput.value = ''; // Clear input field
 
                 try {
-                    // Send request to Flask backend (update the port to 5002)
-                    const response = await fetch(`http://127.0.0.1:5002/get_response`, {
+                    // Send request to Flask backend (update the URL for Render)
+                    const response = await fetch(`https://portfolio-nqpj.onrender.com`, {  // Change this line
                         method: 'POST', // Ensure you're using POST method
                         headers: {
                             'Content-Type': 'application/json',
