@@ -166,7 +166,7 @@
 
                 try {
                     // Send request to Flask backend (update the port to 5002)
-                    const response = await fetch(`http://127.0.0.1:5002/get_response`, {
+                    const response = await fetch(`http://127.0.0.1:5000/get_response`, {
                         method: 'POST', // Ensure you're using POST method
                         headers: {
                             'Content-Type': 'application/json',
