@@ -165,8 +165,8 @@
                 userInput.value = ''; // Clear input field
 
                 try {
-                    // Send request to Flask backend (update the URL for Render)
-                    const response = await fetch(`https://portfolio-nqpj.onrender.com`, {  // Change this line
+                    // Send request to Flask backend
+                    const response = await fetch(`http://127.0.0.1:10000/get_response`, {  // Ensure the URL matches your Flask app
                         method: 'POST', // Ensure you're using POST method
                         headers: {
                             'Content-Type': 'application/json',
