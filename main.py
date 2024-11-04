@@ -3,12 +3,13 @@ import json
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import os
 
 app = Flask(__name__)
 
 # Load the JSON file containing questions and answers
 try:
-    with open(r"C:\Users\15732\OneDrive\Desktop\questions_and_answers.json", "r") as file:
+    with open("questions_and_answers.json", "r") as file:  # Use relative path
         data = json.load(file)
 except FileNotFoundError:
     print("Error: 'questions_and_answers.json' file not found.")
@@ -51,4 +52,6 @@ def chatbot_response():
         return jsonify({"response": "Please provide a question."}), 400
 
 if __name__ == "__main__":
-    app.run(debug=False, port=5002)
+    # Use environment variable for the port
+    port = int(os.environ.get("PORT", 5000))  # Render uses PORT environment variable
+    app.run(host='0.0.0.0', port=port)  # Run on all available interfaces
