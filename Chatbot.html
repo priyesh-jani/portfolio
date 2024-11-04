@@ -61,18 +61,29 @@
             font-family: Arial, sans-serif; /* Font for the body */
         }
 
-        .chat-container {
-            max-width: 600px;
-            margin: 50px auto; /* Centered container */
-            border: 1px solid #ccc; /* Border around the chatbox */
-            border-radius: 8px; /* Rounded corners */
-            background-color: white; /* White background for chatbox */
+        .question-list {
+            flex: 1; /* Take half of the viewport width */
+            padding: 20px; /* Padding for question list */
+            background-color: white; /* Background color for question area */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-            padding: 20px; /* Padding for chatbox */
+            border-radius: 8px; /* Rounded corners */
+            overflow-y: auto; /* Scroll if content overflows */
+            height: 100%; /* Full height */
+        }
+
+        .chat-container {
+            flex: 1; /* Take the other half of the viewport width */
+            padding: 20px; /* Padding for chat container */
+            background-color: #ffffff; /* White background for chat area */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            border-radius: 8px; /* Rounded corners */
+            position: relative; /* For positioning chat elements */
+            overflow: hidden; /* Prevent overflow */
+            height: 100%; /* Full height */
         }
 
         .chat-box {
-            height: 300px; /* Height for chat area */
+            height: calc(100% - 60px); /* Height for chat area minus input area */
             overflow-y: auto; /* Enable scrolling */
             border: 1px solid #ddd; /* Light border */
             border-radius: 4px; /* Rounded corners */
@@ -86,6 +97,7 @@
             border: 1px solid #ccc; /* Border for input */
             border-radius: 4px; /* Rounded corners */
             margin-right: 10px; /* Space between input and button */
+            box-sizing: border-box; /* Include padding in width calculation */
         }
 
         #send-button {
@@ -98,6 +110,22 @@
         }
 
         #send-button:hover {
+            background-color: #d0543a; /* Darker button color on hover */
+        }
+
+        .question-list button {
+            display: block;
+            margin: 5px 0; /* Space between buttons */
+            padding: 10px;
+            width: 100%; /* Full width buttons */
+            background-color: #F05F40; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        .question-list button:hover {
             background-color: #d0543a; /* Darker button color on hover */
         }
     </style>
