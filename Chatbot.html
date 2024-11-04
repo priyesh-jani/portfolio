@@ -147,7 +147,7 @@
 
     <div class="chat-container">
         <div class="chat-box" id="chat-box"></div>
-        <input type="text" id="user-input" placeholder="Ask me anything...">
+        <input type="text" id="user-input" placeholder="Ask me anything..." autocomplete="off">
         <button id="send-button">Send</button>
     </div>
 
@@ -165,12 +165,24 @@
                 userInput.value = ''; // Clear input field
 
                 // Send request to Flask backend
-                const response = await fetch(`/ask/${encodeURIComponent(userQuestion)}`);
-                const data = await response.json();
-                const answer = data.answer;
+                const response = await fetch('/get_response', { // Make sure this matches your Flask route
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ question: userQuestion })
+                });
 
-                // Append chatbot answer to chat box
-                chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${answer}</div>`;
+                // Handle the response
+                if (response.ok) {
+                    const data = await response.json();
+                    const answer = data.response || "Sorry, I didn't understand that.";
+
+                    // Append chatbot answer to chat box
+                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${answer}</div>`;
+                } else {
+                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> There was an error communicating with the server.</div>`;
+                }
                 
                 // Scroll to the bottom of the chat box
                 chatBox.scrollTop = chatBox.scrollHeight;
