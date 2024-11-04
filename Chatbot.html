@@ -161,12 +161,12 @@
             const userQuestion = userInput.value.trim();
             if (userQuestion) {
                 // Append user question to chat box
-                chatBox.innerHTML += <div><strong>You:</strong> ${userQuestion}</div>;
+                chatBox.innerHTML += `<div><strong>You:</strong> ${userQuestion}</div>`;
                 userInput.value = ''; // Clear input field
 
                 try {
                     // Send request to Flask backend (update this URL for production)
-                    const response = await fetch(https://portfolio-nqpj.onrender.com/get_response, {
+                    const response = await fetch("https://portfolio-nqpj.onrender.com/get_response", {
                         method: 'POST', // Ensure you're using POST method
                         headers: {
                             'Content-Type': 'application/json',
@@ -179,16 +179,16 @@
                         const answer = data.response; // Get the response from the server
 
                         // Append chatbot answer to chat box
-                        chatBox.innerHTML += <div><strong>Chatbot:</strong> ${answer}</div>;
+                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${answer}</div>`;
                         
                         // Scroll to the bottom of the chat box
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
                         const errorMessage = await response.text();
-                        chatBox.innerHTML += <div><strong>Chatbot:</strong> There was an error communicating with the server: ${errorMessage}</div>;
+                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> There was an error communicating with the server: ${errorMessage}</div>`;
                     }
                 } catch (error) {
-                    chatBox.innerHTML += <div><strong>Chatbot:</strong> There was an error communicating with the server: ${error.message}</div>;
+                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> There was an error communicating with the server: ${error.message}</div>`;
                 }
             }
         }
