@@ -32,51 +32,35 @@
             color: #F05F40; /* Same hover color as main page */
         }
 
-        /* Additional styles for mobile menu */
-        .menu-btn {
-            display: none;
-        }
-
-        @media (max-width: 768px) {
-            .menu-btn {
-                display: block;
-                position: absolute;
-                right: 20px;
-                top: 15px;
-                cursor: pointer;
-                font-size: 24px;
-                color: #F05F40;
-            }
-            .navbar-collapse {
-                display: none;
-            }
-            .navbar-collapse.show {
-                display: block;
-            }
-        }
-
         /* Chatbot Styles */
         body {
             background-color: #f8f9fa; /* Light background for chatbot */
             font-family: Arial, sans-serif; /* Font for the body */
+            display: flex; /* Flexbox layout */
         }
 
-        .intro-header {
-            display: flex;
-            justify-content: space-between;
-            padding: 20px;
+        .container {
+            flex: 1; /* Allow the container to grow */
+            display: flex; /* Flexbox layout for the container */
+        }
+
+        .question-list {
+            width: 50%; /* Take half of the viewport width */
+            padding: 20px; /* Padding for question list */
+            background-color: white; /* Background color for question area */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+            border-radius: 8px; /* Rounded corners */
+            overflow-y: auto; /* Scroll if content overflows */
         }
 
         .chat-container {
-            max-width: 600px;
-            margin: 50px auto; /* Centered container */
-            border: 1px solid #ccc; /* Border around the chatbox */
-            border-radius: 8px; /* Rounded corners */
-            background-color: white; /* White background for chatbox */
+            width: 50%; /* Take the other half of the viewport width */
+            padding: 20px; /* Padding for chat container */
+            background-color: #ffffff; /* White background for chat area */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
-            padding: 20px; /* Padding for chatbox */
-            position: relative; /* Relative positioning for absolute elements */
-            float: right; /* Align to the right */
+            border-radius: 8px; /* Rounded corners */
+            position: relative; /* For positioning chat elements */
+            overflow: hidden; /* Prevent overflow */
         }
 
         .chat-box {
@@ -107,10 +91,6 @@
 
         #send-button:hover {
             background-color: #d0543a; /* Darker button color on hover */
-        }
-
-        .question-list {
-            margin-top: 20px;
         }
 
         .question-list button {
@@ -163,27 +143,31 @@
     <header class="intro-header" style="background-image: url('img/chat-bg.jpg')">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="col-lg-12 col-md-10 col-md-offset-1">
                     <div class="site-heading">
                         <h1>Discover My Professional Path: Ask Away!</h1>
                         <hr class="small">
                         <span class="subheading" style="margin-bottom: 10px;">Ask me any questions from the list below to get answers about my professional journey?!</span>
-                    </div>
-                    <div class="question-list">
-                        <button onclick="sendPredefinedQuestion('What is your experience in data analytics?')">What is your experience in data analytics?</button>
-                        <button onclick="sendPredefinedQuestion('How did you transition from petroleum engineering to data analytics?')">How did you transition from petroleum engineering to data analytics?</button>
-                        <button onclick="sendPredefinedQuestion('What tools do you use for data analysis?')">What tools do you use for data analysis?</button>
-                        <button onclick="sendPredefinedQuestion('What advice do you have for someone starting in data analytics?')">What advice do you have for someone starting in data analytics?</button>
                     </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="chat-container">
-        <div class="chat-box" id="chat-box"></div>
-        <input type="text" id="user-input" placeholder="Ask me anything...">
-        <button id="send-button">Send</button>
+    <div class="container">
+        <div class="question-list">
+            <h3>Select a Question:</h3>
+            <button onclick="sendPredefinedQuestion('What is your experience in data analytics?')">What is your experience in data analytics?</button>
+            <button onclick="sendPredefinedQuestion('How did you transition from petroleum engineering to data analytics?')">How did you transition from petroleum engineering to data analytics?</button>
+            <button onclick="sendPredefinedQuestion('What tools do you use for data analysis?')">What tools do you use for data analysis?</button>
+            <button onclick="sendPredefinedQuestion('What advice do you have for someone starting in data analytics?')">What advice do you have for someone starting in data analytics?</button>
+        </div>
+        
+        <div class="chat-container">
+            <div class="chat-box" id="chat-box"></div>
+            <input type="text" id="user-input" placeholder="Ask me anything...">
+            <button id="send-button">Send</button>
+        </div>
     </div>
 
     <script>
