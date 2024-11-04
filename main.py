@@ -1,33 +1,54 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, request, jsonify
 import json
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
+app = Flask(__name__)
+
 # Load the JSON file containing questions and answers
-with open("questions_and_answers.json", "r") as file:
-    data = json.load(file)
+try:
+    with open(r"C:\Users\15732\OneDrive\Desktop\questions_and_answers.json", "r") as file:
+        data = json.load(file)
+except FileNotFoundError:
+    print("Error: 'questions_and_answers.json' file not found.")
+    data = []
 
 # Convert JSON data to DataFrame for easier processing
 df = pd.DataFrame(data)
 
 # Initialize TF-IDF Vectorizer
 vectorizer = TfidfVectorizer()
-question_vectors = vectorizer.fit_transform(df["prompt"])
 
-app = Flask(__name__)
+# Check if DataFrame is empty
+if not df.empty:
+    # Fit and transform the questions to create TF-IDF vectors
+    question_vectors = vectorizer.fit_transform(df["prompt"])
+else:
+    print("Error: No data found in JSON file.")
 
-@app.route('/')
-def home():
-    return render_template('index.html')
-
-@app.route('/ask/<user_question>', methods=['GET'])
-def get_answer(user_question):
+# Function to find the closest matching question and return its answer
+def get_answer(user_question, df, question_vectors):
     user_question_vector = vectorizer.transform([user_question])
     similarities = cosine_similarity(user_question_vector, question_vectors)
     closest_idx = similarities.argmax()
     answer = df.iloc[closest_idx]["response"]
-    return jsonify({'answer': answer})
+    return answer
+
+# Root route to confirm API is running
+@app.route('/')
+def home():
+    return "Chatbot API is running!"
+
+# Define a route for chatbot responses
+@app.route('/get_response', methods=['POST'])
+def chatbot_response():
+    user_question = request.json.get("question")
+    if user_question:
+        answer = get_answer(user_question, df, question_vectors)
+        return jsonify({"response": answer})
+    else:
+        return jsonify({"response": "Please provide a question."}), 400
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=False, port=5002)
