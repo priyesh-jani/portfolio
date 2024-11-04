@@ -61,6 +61,12 @@
             font-family: Arial, sans-serif; /* Font for the body */
         }
 
+        .intro-header {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
         .chat-container {
             max-width: 600px;
             margin: 50px auto; /* Centered container */
@@ -69,6 +75,8 @@
             background-color: white; /* White background for chatbox */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
             padding: 20px; /* Padding for chatbox */
+            position: relative; /* Relative positioning for absolute elements */
+            float: right; /* Align to the right */
         }
 
         .chat-box {
@@ -100,6 +108,27 @@
         #send-button:hover {
             background-color: #d0543a; /* Darker button color on hover */
         }
+
+        .question-list {
+            margin-top: 20px;
+        }
+
+        .question-list button {
+            display: block;
+            margin: 5px 0; /* Space between buttons */
+            padding: 10px;
+            width: 100%; /* Full width buttons */
+            background-color: #F05F40; /* Button color */
+            color: white; /* Button text color */
+            border: none; /* No border */
+            border-radius: 4px; /* Rounded corners */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        .question-list button:hover {
+            background-color: #d0543a; /* Darker button color on hover */
+        }
+
     </style>
 </head>
 <body>
@@ -140,6 +169,12 @@
                         <hr class="small">
                         <span class="subheading" style="margin-bottom: 10px;">Ask me any questions from the list below to get answers about my professional journey?!</span>
                     </div>
+                    <div class="question-list">
+                        <button onclick="sendPredefinedQuestion('What is your experience in data analytics?')">What is your experience in data analytics?</button>
+                        <button onclick="sendPredefinedQuestion('How did you transition from petroleum engineering to data analytics?')">How did you transition from petroleum engineering to data analytics?</button>
+                        <button onclick="sendPredefinedQuestion('What tools do you use for data analysis?')">What tools do you use for data analysis?</button>
+                        <button onclick="sendPredefinedQuestion('What advice do you have for someone starting in data analytics?')">What advice do you have for someone starting in data analytics?</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -156,14 +191,16 @@
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
 
-        // Function to send a question to the server and receive an answer
-        async function sendQuestion() {
-            const userQuestion = userInput.value.trim();
-            if (userQuestion) {
-                // Append user question to chat box
-                chatBox.innerHTML += `<div><strong>You:</strong> ${userQuestion}</div>`;
-                userInput.value = ''; // Clear input field
+        // Function to send a predefined question
+        function sendPredefinedQuestion(question) {
+            chatBox.innerHTML += `<div><strong>You:</strong> ${question}</div>`;
+            userInput.value = ''; // Clear input field
+            sendQuestion(question); // Call sendQuestion with the predefined question
+        }
 
+        // Function to send a question to the server and receive an answer
+        async function sendQuestion(userQuestion) {
+            if (userQuestion) {
                 try {
                     // Send request to Flask backend (update this URL for production)
                     const response = await fetch(`https://portfolio-nqpj.onrender.com/get_response`, {
@@ -184,24 +221,31 @@
                         // Scroll to the bottom of the chat box
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
-                        const errorMessage = await response.text();
-                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> There was an error communicating with the server: ${errorMessage}</div>`;
+                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> Sorry, I couldn't understand that.</div>`;
                     }
                 } catch (error) {
-                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> There was an error communicating with the server: ${error.message}</div>`;
+                    console.error('Error:', error);
+                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> An error occurred. Please try again.</div>`;
                 }
             }
         }
 
-        // Event listener for the send button
-        sendButton.addEventListener('click', sendQuestion);
+        // Event listener for sending input
+        sendButton.addEventListener('click', () => {
+            const userQuestion = userInput.value;
+            chatBox.innerHTML += `<div><strong>You:</strong> ${userQuestion}</div>`;
+            sendQuestion(userQuestion); // Call function to send question
+            userInput.value = ''; // Clear input field
+        });
 
-        // Event listener for pressing Enter key
-        userInput.addEventListener('keypress', function(event) {
+        // Allow pressing 'Enter' to send the question
+        userInput.addEventListener('keypress', (event) => {
             if (event.key === 'Enter') {
-                sendQuestion();
+                sendButton.click(); // Trigger the click event of the send button
             }
         });
     </script>
+    <script src="https://use.fontawesome.com/8b27923a7c.js"></script>
+    <script src="js/bootstrap.js"></script>
 </body>
 </html>
