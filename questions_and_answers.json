@@ -4,6 +4,14 @@
         "response": "I have over 8 years of experience in data analytics, currently serving as a Senior Data Analyst at The Home Depot. I specialize in web analytics, funnel optimization, and data visualization."
     },
     {
+        "prompt": "Provide me with LinkedIn Link?",
+        "response": "https://www.linkedin.com/in/priyesh-jani/"
+    },
+    {
+        "prompt": "Provide me with your resume?",
+        "response": "https://drive.google.com/file/d/17YiVMqqIeMNU-yAEldTJnB7SJWDHlYuh/view"
+    },
+    {
         "prompt": "What motivated you to pursue a career in data analytics?",
         "response": "I was driven by a passion for deriving actionable insights from data to solve business challenges, especially in customer experience and conversion optimization."
     },
@@ -192,7 +200,7 @@
         "response": "Managing demand planning at Samsung was challenging but rewarding. I collaborated across teams to achieve high accuracy and reduce costs."
     },
     {
-        "prompt": "What\u2019s your strategy for stakeholder communication?",
+        "prompt": "What is your strategy for stakeholder communication?",
         "response": "I prioritize clear, data-driven communication and provide visual dashboards that improve stakeholder comprehension."
     },
     {
