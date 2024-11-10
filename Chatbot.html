@@ -52,6 +52,32 @@
             .navbar-collapse.show {
                 display: block;
             }
+
+            .site-heading h1 {
+                font-size: 18px; /* Adjust font size */
+            }
+
+            .site-heading .subheading {
+                font-size: 14px; /* Adjust font size for subheading */
+            }
+
+            .question-list, .chat-container {
+                display: block;
+                width: 100%;
+            }
+
+            .question-list {
+                order: 1; /* Stack question list on top */
+                margin-bottom: 10px;
+            }
+
+            .chat-container {
+                order: 2; /* Stack chat container below */
+            }
+
+            #user-input, #send-button, #dropdown-send-button {
+                width: 100%;
+            }
         }
 
         .site-heading h1 {
@@ -70,7 +96,7 @@
         .question-list, .chat-container {
             margin-top: 0; /* Reduce the space between the subheading and the chat boxes */
             padding-top: 10px; /* Optionally, adjust padding to fine-tune the space */
-        }  
+        }
 
         body {
             background-color: #f8f9fa;
@@ -98,10 +124,9 @@
             min-height: 350px;
             height: auto; /* Allow it to grow as content is added */
         }
- 
-        
+
         .chat-box {
-            min-height: 200px; /* Default height for chatbox */
+            min-height: 300px; /* Default height for chatbox */
             height: auto; /* Allows it to expand as messages are added */
             overflow-y: auto;
             border: 1px solid #ddd;
@@ -243,52 +268,40 @@
         const questionDropdown = document.getElementById('question-dropdown');
         const dropdownSendButton = document.getElementById('dropdown-send-button');
 
-        // Function to send question
-        async function sendQuestion(question) {
-            const userQuestion = question || userInput.value.trim();
-            if (userQuestion) {
-                chatBox.innerHTML += `<div class="user-msg"><strong>You:</strong> ${userQuestion}</div>`;
+        sendButton.addEventListener('click', () => {
+            const userMessage = userInput.value;
+            if (userMessage.trim() !== '') {
+                displayMessage(userMessage, 'user-msg');
                 userInput.value = '';
-
-                try {
-                    const response = await fetch("https://portfolio-nqpj.onrender.com/get_response", {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ question: userQuestion })
-                    });
-
-                    if (response.ok) {
-                        const data = await response.json();
-                        const answer = data.response;
-                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> ${answer}</div>`;
-                        chatBox.scrollTop = chatBox.scrollHeight;
-                    } else {
-                        const errorMessage = await response.text();
-                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${errorMessage}</div>`;
-                    }
-                } catch (error) {
-                    chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${error.message}</div>`;
-                }
-            }
-        }
-
-        // Add event listeners
-        sendButton.addEventListener('click', () => sendQuestion());
-        userInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                sendQuestion();
+                // Here, you would send the message to the chatbot and get a response
+                const response = getChatbotResponse(userMessage);
+                displayMessage(response, 'chatbot-msg');
             }
         });
 
         dropdownSendButton.addEventListener('click', () => {
             const selectedQuestion = questionDropdown.value;
             if (selectedQuestion) {
-                sendQuestion(selectedQuestion);
-                questionDropdown.value = '';
+                displayMessage(selectedQuestion, 'user-msg');
+                // Here, you would send the question to the chatbot and get a response
+                const response = getChatbotResponse(selectedQuestion);
+                displayMessage(response, 'chatbot-msg');
             }
         });
+
+        function displayMessage(message, className) {
+            const messageDiv = document.createElement('div');
+            messageDiv.textContent = message;
+            messageDiv.classList.add(className);
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // Auto-scroll to bottom
+        }
+
+        function getChatbotResponse(message) {
+            // Simulating a chatbot response for now
+            return "Here's a response to your question!";
+        }
     </script>
+    <script src="js/bootstrap.js"></script>
 </body>
 </html>
