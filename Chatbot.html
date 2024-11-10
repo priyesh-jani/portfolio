@@ -174,8 +174,15 @@
             margin: 5px 0;
         }
 
-@media (max-width: 768px) {
+    @media (max-width: 768px) {
     /* Make the containers full width and stacked on top of each other */
+
+    .question-list, .chat-container {
+        display: block !important; /* Ensures they are stacked vertically */
+        width: 100%;
+        margin: 0 auto 15px; /* Align center and space between containers */
+    }
+        
     .question-list {
         width: 100%;
         margin-bottom: 15px; /* Space between the containers */
@@ -188,11 +195,6 @@
         margin-bottom: 10px; /* Space between question container and chatbox */
     }
 
-    /* Stack question list on top of chatbox */
-    .question-list, .chat-container {
-        display: block;
-        margin-top: 0;
-    }
 
     /* Adjust chatbox height for mobile */
     .chat-box {
