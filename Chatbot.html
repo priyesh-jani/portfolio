@@ -271,12 +271,59 @@
     <div class="chat-wrapper">
         <!-- Dropdown for question selection on the left -->
         <div class="question-list">
-            <h4>Select a Question</h4>
+            <h4>Sample Questions</h4>
             <select id="question-dropdown" style="width: 100%; padding: 8px; margin-bottom: 10px;">
                 <option value="">--Select a question--</option>
-                <option value="What is your professional background?">What is your professional background?</option>
-                <option value="What are your key skills?">What are your key skills?</option>
-                <option value="Tell me about a significant project you've worked on.">Tell me about a significant project you've worked on.</option>
+                <option value="Can you provide an overview of your professional journey?">Can you provide an overview of your professional journey?</option>
+                <option value="What motivated you to pursue a career in data analytics?">What motivated you to pursue a career in data analytics?</option>
+                <option value="Where are you currently working, and what is your role?">Where are you currently working, and what is your role?</option>
+                <option value="How long have you been with The Home Depot?">How long have you been with The Home Depot?</option>
+                <option value="Can you tell me about your role prior to joining The Home Depot?">Can you tell me about your role prior to joining The Home Depot?</option>
+                <option value="What are your core technical skills?">What are your core technical skills?</option>
+                <option value="Do you have experience with data visualization?">Do you have experience with data visualization?</option>
+                <option value="Are you experienced with A/B testing?">Are you experienced with A/B testing?</option>
+                <option value="What web analytics tools do you use?">What web analytics tools do you use?</option>
+                <option value="Which programming languages are you proficient in?">Which programming languages are you proficient in?</option>
+                <option value="What are your main responsibilities at The Home Depot?">What are your main responsibilities at The Home Depot?</option>
+                <option value="Can you give an example of a project you worked on at The Home Depot?">Can you give an example of a project you worked on at The Home Depot?</option>
+                <option value="How do you use data to improve customer experience?">How do you use data to improve customer experience?</option>
+                <option value="What tools do you use to analyze customer journeys?">What tools do you use to analyze customer journeys?</option>
+                <option value="How do you ensure your findings are accessible to stakeholders?">How do you ensure your findings are accessible to stakeholders?</option>
+                <option value="What was your role at Samsung Electronics?">What was your role at Samsung Electronics?</option>
+                <option value="How did you optimize profitability at Samsung?">How did you optimize profitability at Samsung?</option>
+                <option value="What dashboards did you create at Samsung?">What dashboards did you create at Samsung?</option>
+                <option value="How did you contribute to demand planning at Samsung?">How did you contribute to demand planning at Samsung?</option>
+                <option value="Did you supervise any team members at Samsung?">Did you supervise any team members at Samsung?</option>
+                <option value="Can you tell me about your experience in the energy industry?">Can you tell me about your experience in the energy industry?</option>
+                <option value="How did you transition from petroleum engineering to data analytics?">How did you transition from petroleum engineering to data analytics?</option>
+                <option value="What tools did you use in the energy industry?">What tools did you use in the energy industry?</option>
+                <option value="What were some of your achievements in the energy sector?">What were some of your achievements in the energy sector?</option>
+                <option value="Did you publish any research in this field?">Did you publish any research in this field?</option>
+                <option value="How do you approach data modeling?">How do you approach data modeling?</option>
+                <option value="Are you familiar with Power BI?">Are you familiar with Power BI?</option>
+                <option value="How do you perform statistical analysis?">How do you perform statistical analysis?</option>
+                <option value="What project management tools do you use?">What project management tools do you use?</option>
+                <option value="What is your experience with forecasting?">What is your experience with forecasting?</option>
+                <option value="Where did you complete your Masters degree?">Where did you complete your Masters degree?</option>
+                <option value="Did you pursue any certifications in data analytics?">Did you pursue any certifications in data analytics?</option>
+                <option value="What was your thesis on in graduate school?">What was your thesis on in graduate school?</option>
+                <option value="Do you have any publications?">Do you have any publications?</option>
+                <option value="What skills did you gain from your educational background?">What skills did you gain from your educational background?</option>
+                <option value="What are some of your key achievements?">What are some of your key achievements?</option>
+                <option value="Have you ever led a team?">Have you ever led a team?</option>
+                <option value="How did you improve team efficiency at Samsung?">How did you improve team efficiency at Samsung?</option>
+                <option value="Can you share an example of a project that drove results?">Can you share an example of a project that drove results?</option>
+                <option value="What is your biggest accomplishment in data analytics?">What is your biggest accomplishment in data analytics?</option>
+                <option value="What inspires you in data analytics?">What inspires you in data analytics?</option>
+                <option value="What are your future career goals?">What are your future career goals?</option>
+                <option value="How do you stay current in data analytics?">How do you stay current in data analytics?</option>
+                <option value="What hobbies do you enjoy outside of work?">What hobbies do you enjoy outside of work?</option>
+                <option value="Do you have experience in coaching or mentoring?">Do you have experience in coaching or mentoring?</option>
+                <option value="What is your approach to problem-solving?">What is your approach to problem-solving?</option>
+                <option value="How do you handle tight deadlines?">How do you handle tight deadlines?</option>
+                <option value="What’s the most challenging project you’ve worked on?">What’s the most challenging project you’ve worked on?</option>
+                <option value="What’s your strategy for stakeholder communication?">What’s your strategy for stakeholder communication?</option>
+                <option value="What impact do you hope to make in your field?">What impact do you hope to make in your field?</option>
                 <!-- Add more questions as needed -->
             </select>
             <button id="dropdown-send-button" style="width: 100%;">Ask</button>
@@ -316,7 +363,7 @@
                     if (response.ok) {
                         const data = await response.json();
                         const answer = data.response;
-                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> ${answer}</div>`;
+                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Priyesh:</strong> ${answer}</div>`;
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
                         const errorMessage = await response.text();
