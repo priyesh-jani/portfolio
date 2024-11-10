@@ -77,6 +77,12 @@
             font-family: 'Roboto', sans-serif;
         }
 
+        .chat-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
         .question-list {
             flex: 1;
             padding: 20px;
@@ -177,6 +183,11 @@
     @media (max-width: 768px) {
     /* Make the containers full width and stacked on top of each other */
 
+    .chat-wrapper {
+        display: block; /* Stacks the containers vertically */
+        padding: 10px;
+    }
+
     .question-list, .chat-container {
         display: block !important; /* Ensures they are stacked vertically */
         width: 100%;
@@ -257,7 +268,7 @@
         </div>
     </header>
 
-    <div style="display: flex; gap: 20px; padding: 20px;">
+    <div class="chat-wrapper">
         <!-- Dropdown for question selection on the left -->
         <div class="question-list">
             <h4>Select a Question</h4>
