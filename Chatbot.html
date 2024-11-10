@@ -247,7 +247,7 @@
         async function sendQuestion(question) {
             const userQuestion = question || userInput.value.trim();
             if (userQuestion) {
-                chatBox.innerHTML += <div class="user-msg"><strong>You:</strong> ${userQuestion}</div>;
+                chatBox.innerHTML += `<div class="user-msg"><strong>You:</strong> ${userQuestion}</div>`;
                 userInput.value = '';
 
                 try {
@@ -262,14 +262,14 @@
                     if (response.ok) {
                         const data = await response.json();
                         const answer = data.response;
-                        chatBox.innerHTML += <div class="chatbot-msg"><strong>Chatbot:</strong> ${answer}</div>;
+                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> ${answer}</div>`;
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
                         const errorMessage = await response.text();
-                        chatBox.innerHTML += <div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${errorMessage}</div>;
+                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${errorMessage}</div>`;
                     }
                 } catch (error) {
-                    chatBox.innerHTML += <div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${error.message}</div>;
+                    chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${error.message}</div>`;
                 }
             }
         }
