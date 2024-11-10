@@ -54,6 +54,24 @@
             }
         }
 
+        .site-heading h1 {
+            font-size: 36px; /* Adjust font size */
+            font-weight: bold; /* Set font weight */
+            margin-bottom: 10px; /* Reduce space below the heading */
+        }
+
+        .site-heading .subheading {
+            font-size: 18px; /* Set font size for subheading */
+            margin-top: 0; /* Remove space above the subheading */
+            margin-bottom: 20px; /* Add some space below the subheading */
+            font-style: italic; /* Optional: Make subheading italic */
+        }
+
+        .question-list, .chat-container {
+            margin-top: 0; /* Reduce the space between the subheading and the chat boxes */
+            padding-top: 10px; /* Optionally, adjust padding to fine-tune the space */
+        }  
+
         body {
             background-color: #f8f9fa;
             font-family: 'Roboto', sans-serif;
@@ -79,12 +97,7 @@
             overflow: hidden;
             height: 100%;
         }
-
-
-        .question-list, .chat-container {
-            margin-top: 20px; /* Reduce the space between the subheading and the chat boxes */
-            padding-top: 10px; /* Optionally, adjust padding to fine-tune the space */
-        }   
+ 
         
         .chat-box {
             height: calc(100% - 120px);
