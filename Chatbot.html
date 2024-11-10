@@ -95,12 +95,14 @@
             border-radius: 8px;
             position: relative;
             overflow: hidden;
-            height: 250px;
+            min-height: 350px;
+            height: auto; /* Allow it to grow as content is added */
         }
  
         
         .chat-box {
-            height: calc(100% - 60px);
+            min-height: 200px; /* Default height for chatbox */
+            height: auto; /* Allows it to expand as messages are added */
             overflow-y: auto;
             border: 1px solid #ddd;
             border-radius: 4px;
