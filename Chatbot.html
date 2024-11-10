@@ -80,8 +80,14 @@
             height: 100%;
         }
 
+
+        .question-list, .chat-container {
+            margin-top: 20px; /* Reduce the space between the subheading and the chat boxes */
+            padding-top: 10px; /* Optionally, adjust padding to fine-tune the space */
+        }   
+        
         .chat-box {
-            height: calc(100% - 60px);
+            height: calc(100% - 120px);
             overflow-y: auto;
             border: 1px solid #ddd;
             border-radius: 4px;
@@ -143,8 +149,7 @@
         }
 
         .chatbot-msg {
-            background-color: #F05F40;
-            color: white;
+            background-color: #CCCCCC;
             float: left;
             text-align: left;
         }
