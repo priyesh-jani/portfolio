@@ -56,7 +56,7 @@
 
         body {
             background-color: #f8f9fa;
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
         }
 
         .question-list {
@@ -125,6 +125,33 @@
 
         .question-list button:hover {
             background-color: #d0543a;
+        }
+
+        /* Chat bubble style */
+        .chat-box div {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            max-width: 80%;
+            clear: both;
+        }
+
+        .user-msg {
+            background-color: #f0f0f0;
+            float: right;
+            text-align: right;
+        }
+
+        .chatbot-msg {
+            background-color: #F05F40;
+            color: white;
+            float: left;
+            text-align: left;
+        }
+
+        /* Button-based dropdown */
+        .question-list button {
+            margin: 5px 0;
         }
     </style>
 </head>
@@ -196,10 +223,11 @@
         const questionDropdown = document.getElementById('question-dropdown');
         const dropdownSendButton = document.getElementById('dropdown-send-button');
 
+        // Function to send question
         async function sendQuestion(question) {
             const userQuestion = question || userInput.value.trim();
             if (userQuestion) {
-                chatBox.innerHTML += `<div><strong>You:</strong> ${userQuestion}</div>`;
+                chatBox.innerHTML += `<div class="user-msg"><strong>You:</strong> ${userQuestion}</div>`;
                 userInput.value = '';
 
                 try {
@@ -214,18 +242,19 @@
                     if (response.ok) {
                         const data = await response.json();
                         const answer = data.response;
-                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${answer}</div>`;
+                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> ${answer}</div>`;
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
                         const errorMessage = await response.text();
-                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> Error: ${errorMessage}</div>`;
+                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${errorMessage}</div>`;
                     }
                 } catch (error) {
-                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> Error: ${error.message}</div>`;
+                    chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${error.message}</div>`;
                 }
             }
         }
 
+        // Add event listeners
         sendButton.addEventListener('click', () => sendQuestion());
         userInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
