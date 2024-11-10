@@ -173,6 +173,49 @@
         .question-list button {
             margin: 5px 0;
         }
+
+@media (max-width: 768px) {
+    /* Make the containers full width and stacked on top of each other */
+    .question-list {
+        width: 100%;
+        margin-bottom: 15px; /* Space between the containers */
+        padding: 10px;
+    }
+
+    .chat-container {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px; /* Space between question container and chatbox */
+    }
+
+    /* Stack question list on top of chatbox */
+    .question-list, .chat-container {
+        display: block;
+        margin-top: 0;
+    }
+
+    /* Adjust chatbox height for mobile */
+    .chat-box {
+        height: auto; /* Allow chatbox height to adjust based on content */
+        min-height: 200px; /* Ensure minimum height is set */
+    }
+
+    /* Adjust input and send button for mobile */
+    #user-input {
+        width: 100%; /* Make input field full width */
+        margin-right: 0; /* Remove right margin */
+    }
+
+    #send-button {
+        width: 100%; /* Make button full width */
+        padding: 12px;
+    }
+
+    #dropdown-send-button {
+        width: 100%; /* Make button full width */
+        padding: 12px;
+    }
+    }
     </style>
 </head>
 <body>
