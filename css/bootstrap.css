@@ -6574,14 +6574,14 @@ button.close {
 }
 
 .intro-header h1 {
-    font-size: 3rem;
+    font-size: 24px !important;
     font-weight: bold;
     margin-bottom: 0.5rem;
     color: #000000;
 }
 
 .intro-header .subheading {
-    font-size: 1.5rem;
+    font-size: 16px !important;
     color: #34363B;
 }
 
