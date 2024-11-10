@@ -8,28 +8,32 @@
     <style>
         /* Ensure consistent navbar styles */
         .navbar-default {
-            background-color: white; /* Same background color as main page */
-            border-color: rgba(34, 34, 34, 0.5); /* Same border color as main page */
+            background-color: white !important;
+            border-color: rgba(34, 34, 34, 0.5);
         }
 
         .navbar-header .navbar-brand {
-            color: #F05F40; /* Orange color */
-            font-weight: 500;
-            text-transform: uppercase;
+            color: #EB5E28 !important;
+            font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            text-transform: uppercase !important;
         }
 
         .navbar-header .navbar-brand:hover,
         .navbar-header .navbar-brand:focus {
-            color: #F05F40; /* Adjust hover color */
+            color: #DC2F02 !important;
         }
 
         .nav > li > a {
-            color: #F05F40; /* Same color as main page */
+            color: #000000 !important;
+            font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            text-transform: uppercase !important;
         }
 
         .nav > li > a:hover,
         .nav > li > a:focus {
-            color: #F05F40; /* Same hover color as main page */
+            color: #044DBA !important;
         }
 
         /* Additional styles for mobile menu */
@@ -45,7 +49,9 @@
                 top: 15px;
                 cursor: pointer;
                 font-size: 24px;
-                color: #F05F40;
+                color: #EB5E28 !important;
+                font-weight: bold !important;
+                font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important
             }
             .navbar-collapse {
                 display: none;
@@ -53,6 +59,21 @@
             .navbar-collapse.show {
                 display: block;
             }
+
+        .site-heading h1 {
+            font-size: 24px; /* Adjust font size */
+            font-weight: bold; /* Set font weight */
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif
+            margin-bottom: 0; /* Reduce space below the heading */
+        }
+
+        .site-heading .subheading {
+            font-size: 16px; /* Set font size for subheading */
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif
+            margin-top: 0; /* Remove space above the subheading */
+            margin-bottom: 0; /* Add some space below the subheading */
+            font-style: italic; /* Optional: Make subheading italic */
+        }
         }
     </style>
 </head>
