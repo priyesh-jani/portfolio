@@ -6607,12 +6607,12 @@ button.close {
 .post-title {
     font-size: 16px;
     font-weight: bold;
-    color: #044DBA;
+    color: #044DBA !important;
 }
 
 .post-subtitle {
     font-size: 12px;
-    color: #000000;
+    color: #000000 !important;
 }
 
 .post-meta {
