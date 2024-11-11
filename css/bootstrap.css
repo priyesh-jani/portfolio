@@ -6588,7 +6588,7 @@ button.close {
 /* Blog Post Styles */
 .post-preview {
     margin-bottom: 30px;
-    background: #f5f5f5; /* Website background color */
+    background: #F8F9FA; /* Website background color */
     padding: 20px;
     border-radius: 8px;
     border: 2px solid #36365f; /* Border color */
@@ -6601,23 +6601,23 @@ button.close {
 
 .post-preview a {
     text-decoration: none;
-    color: #ff4d4d;
+    color: #F8F9FA;
 }
 
 .post-title {
-    font-size: 2rem;
-    font-weight: bold;
-    color: #ff4d4d;
-}
-
-.post-subtitle {
-    font-size: 1.25rem;
+    font-size: 16px;
     font-weight: bold;
     color: #000000;
 }
 
+.post-subtitle {
+    font-size: 12px;
+    font-weight: bold;
+    color: #343A40;
+}
+
 .post-meta {
-    font-size: 0.875rem;
+    font-size: 8px;
     color: #a0a0a0;
 }
 
