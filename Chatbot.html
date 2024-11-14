@@ -418,6 +418,23 @@
         const dropdownSendButton = document.getElementById('dropdown-send-button');
         const clearButton = document.getElementById('clear-button'); // New clear button
 
+        window.onload = function() {
+            // Create the initial bot message
+            const initialBotMessage = document.createElement("div");
+            initialBotMessage.classList.add("chatbot-msg");
+            initialBotMessage.innerHTML = "<strong>Priyesh:</strong> Please wait at least 50 seconds for the first response...";
+    
+            // Append the initial message to the chat box
+            chatBox.appendChild(initialBotMessage);
+    
+            // Set a timeout to remove the initial message after 50 seconds
+            setTimeout(() => {
+                if (chatBox.contains(initialBotMessage)) {
+                    chatBox.removeChild(initialBotMessage);
+                }
+            }, 50000); // 50000 milliseconds = 50 seconds
+        };
+        
         // Function to send question
         async function sendQuestion(question) {
             const userQuestion = question || userInput.value.trim();
