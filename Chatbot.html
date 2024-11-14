@@ -112,8 +112,8 @@
             min-height: 350px;
             height: auto; /* Allow it to grow as content is added */
         }
- 
-        
+
+
         .chat-box {
             min-height: 300px; /* Default height for chatbox */
             height: auto; /* Allows it to expand as messages are added */
@@ -123,7 +123,6 @@
             padding: 10px;
             margin-bottom: 10px;
         }
-
 
         .input-container {
             display: flex;
@@ -166,16 +165,16 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, background-color 0.3s ease;
         }
-        
+
         #clear-button:hover {
             background-color: #FF1F1F;
             transform: scale(1.1); /* Slight grow effect */
         }
-        
+
         #clear-button:focus {
             outline: none;
         }
-        
+
         .trash-icon {
             font-size: 18px;
             color: white;
@@ -240,7 +239,7 @@
         width: 100%;
         margin: 0 auto 15px; /* Align center and space between containers */
     }
-        
+
     .question-list {
         margin-bottom: 15px; /* Space between the containers */
         padding: 10px;
@@ -260,19 +259,17 @@
 
     /* Adjust input and send button for mobile */
     #user-input {
-        width: 80%; /* Make input field full width */
-        margin-right: 10px;
+        width: 100%; /* Make input field full width */
         margin-right: 0; /* Remove right margin */
     }
 
     #send-button {
-        width: 60%; /* Make button full width */
-        margin-right: 5px;
+        width: 100%; /* Make button full width */
         padding: 12px;
     }
 
     #clear-button {
-        width: 30%; /* Make button full width */
+        width: 100%; /* Make button full width */
         padding: 12px;
     }
 
@@ -385,14 +382,9 @@
 
         <!-- Chat container on the right -->
         <div class="chat-container">
-            <!--<div class="chat-box" id="chat-box">
-                <!-- Initial message from the bot -->
-                <!--<div class="message bot-message" id="initial-message">
-                    Priyesh: Please wait at least 50 seconds for the first response.
-                </div>-->
-            </div>-->
+            <div class="chat-box" id="chat-box"></div>
             <div class="input-container">
-                 <input type="text" id="user-input" placeholder="Ask me anything...">
+                 <input type="text" id="user-input" placeholder="Ask me anything, Please wait at least 50sec for first response...">
                  <button id="send-button">Send</button>
                  <button id="clear-button"> <i class="trash-icon"></i></button>
             </div>
@@ -407,31 +399,13 @@
         const dropdownSendButton = document.getElementById('dropdown-send-button');
         const clearButton = document.getElementById('clear-button'); // New clear button
 
-    // Display initial message on load
-        window.onload = function() {
-            // Create the initial bot message
-            const initialBotMessage = document.createElement("div");
-            initialBotMessage.classList.add("chatbot-msg");
-            initialBotMessage.innerHTML = "<strong>Priyesh:</strong> Please wait at least 50 seconds for the first response...";
-    
-            // Append the initial message to the chat box
-            chatBox.appendChild(initialBotMessage);
-    
-            // Set a timeout to remove the initial message after 50 seconds
-            setTimeout(() => {
-                if (chatBox.contains(initialBotMessage)) {
-                    chatBox.removeChild(initialBotMessage);
-                }
-            }, 50000); // 50000 milliseconds = 50 seconds
-        };
-
         // Function to send question
         async function sendQuestion(question) {
             const userQuestion = question || userInput.value.trim();
             if (userQuestion) {
                 chatBox.innerHTML += `<div class="user-msg"><strong>You:</strong> ${userQuestion}</div>`;
                 userInput.value = '';
-    
+
                 try {
                     const response = await fetch("https://portfolio-nqpj.onrender.com/get_response", {
                         method: 'POST',
@@ -440,7 +414,7 @@
                         },
                         body: JSON.stringify({ question: userQuestion })
                     });
-    
+
                     if (response.ok) {
                         const data = await response.json();
                         const answer = data.response;
@@ -455,12 +429,12 @@
                 }
             }
         }
-    
+
         function clearChat() {
-            chatBox.innerHTML = ''; // Clear chat box content
-            userInput.value = '';   // Clear user input field
-        }
-    
+        chatBox.innerHTML = ''; // Clear chat box content
+        userInput.value = '';   // Clear user input field
+            }
+
         // Add event listeners
         sendButton.addEventListener('click', () => sendQuestion());
         userInput.addEventListener('keypress', function(event) {
@@ -468,7 +442,7 @@
                 sendQuestion();
             }
         });
-    
+
         dropdownSendButton.addEventListener('click', () => {
             const selectedQuestion = questionDropdown.value;
             if (selectedQuestion) {
@@ -476,9 +450,8 @@
                 questionDropdown.value = '';
             }
         });
-    
+
         clearButton.addEventListener('click', clearChat);
     </script>
-
 </body>
 </html>
