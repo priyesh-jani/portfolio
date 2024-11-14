@@ -401,6 +401,24 @@
         const dropdownSendButton = document.getElementById('dropdown-send-button');
         const clearButton = document.getElementById('clear-button'); // New clear button
 
+    // Function to show "Priyesh is typing..." message
+        function showTypingIndicator() {
+            const typingIndicator = document.createElement('div');
+            typingIndicator.id = 'typing-indicator';
+            typingIndicator.classList.add('chatbot-msg');
+            typingIndicator.innerHTML = '<strong>Priyesh is typing...</strong>';
+            chatBox.appendChild(typingIndicator);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+    
+        // Function to remove the "Priyesh is typing..." message
+        function removeTypingIndicator() {
+            const typingIndicator = document.getElementById('typing-indicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+
         // Function to send question
         async function sendQuestion(question) {
             const userQuestion = question || userInput.value.trim();
