@@ -341,6 +341,7 @@
         <div class="chat-container">
             <div class="chat-box" id="chat-box"></div>
             <input type="text" id="user-input" placeholder="Ask me anything, Please wait at least 50sec for first response...">
+            <button id="clear-button">Clear</button>
             <button id="send-button">Send</button>
         </div>
     </div>
@@ -351,6 +352,7 @@
         const sendButton = document.getElementById('send-button');
         const questionDropdown = document.getElementById('question-dropdown');
         const dropdownSendButton = document.getElementById('dropdown-send-button');
+        const clearButton = document.getElementById('clear-button'); // New clear button
 
         // Function to send question
         async function sendQuestion(question) {
@@ -382,6 +384,11 @@
                 }
             }
         }
+
+        function clearChat() {
+        chatBox.innerHTML = ''; // Clear chat box content
+        userInput.value = '';   // Clear user input field
+            }
 
         // Add event listeners
         sendButton.addEventListener('click', () => sendQuestion());
