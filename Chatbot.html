@@ -146,6 +146,19 @@
             background-color: #044DBA;
         }
 
+        #clear-button {
+            padding: 10px 20px;
+            background-color: #0066FF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #clear-button:hover {
+            background-color: #044DBA;
+        }
+
         .question-list button {
             display: block;
             margin: 5px 0;
@@ -226,6 +239,11 @@
     }
 
     #send-button {
+        width: 100%; /* Make button full width */
+        padding: 12px;
+    }
+
+    #clear-button {
         width: 100%; /* Make button full width */
         padding: 12px;
     }
@@ -341,8 +359,8 @@
         <div class="chat-container">
             <div class="chat-box" id="chat-box"></div>
             <input type="text" id="user-input" placeholder="Ask me anything, Please wait at least 50sec for first response...">
-            <button id="clear-button">Clear</button>
             <button id="send-button">Send</button>
+            <button id="clear-button">Clear</button>
         </div>
     </div>
 
