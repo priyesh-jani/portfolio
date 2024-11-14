@@ -424,17 +424,15 @@
             // Create the initial bot message
             const initialBotMessage = document.createElement("div");
             initialBotMessage.classList.add("chatbot-msg");
-            initialBotMessage.setAttribute("id", "initial-message"); // Add an ID to identify the initial message
             initialBotMessage.innerHTML = "<strong>Priyesh:</strong> Please wait at least 50 seconds for the first response...";
     
             // Append the initial message to the chat box
             chatBox.appendChild(initialBotMessage);
     
-            // Set a timeout to remove the initial message after 50 seconds if no response has come
+            // Set a timeout to remove the initial message after 50 seconds
             setTimeout(() => {
-                const initialMsg = document.getElementById("initial-message");
-                if (initialMsg && chatBox.contains(initialMsg)) {
-                    chatBox.removeChild(initialMsg);
+                if (chatBox.contains(initialBotMessage)) {
+                    chatBox.removeChild(initialBotMessage);
                 }
             }, 50000); // 50000 milliseconds = 50 seconds
         };
