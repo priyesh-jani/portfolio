@@ -133,11 +133,6 @@
             box-sizing: border-box;
         }
 
-        .button-wrapper {
-            display: flex;
-            gap: 10px; /* Adds space between buttons */
-        }
-
         #send-button {
             padding: 10px 15px;
             background-color: #0066FF;
@@ -383,10 +378,8 @@
         <div class="chat-container">
             <div class="chat-box" id="chat-box"></div>
             <input type="text" id="user-input" placeholder="Ask me anything, Please wait at least 50sec for first response...">
-            <div class="button-wrapper">
-                <button id="send-button">Send</button>
-                <button id="clear-button"> <i class="trash-icon"></i></button>
-            </div>
+            <button id="send-button">Send</button>
+            <button id="clear-button"> <i class="trash-icon"></i></button>
         </div>
     </div>
 
