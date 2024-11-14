@@ -396,12 +396,12 @@
 
         <!-- Chat container on the right -->
         <div class="chat-container">
-            <div class="chat-box" id="chat-box">
+            <!--<div class="chat-box" id="chat-box">
                 <!-- Initial message from the bot -->
-                <div class="message bot-message" id="initial-message">
+                <!--<div class="message bot-message" id="initial-message">
                     Priyesh: Please wait at least 50 seconds for the first response.
-                </div>
-            </div>
+                </div>-->
+            </div>-->
             <div class="input-container">
                  <input type="text" id="user-input" placeholder="Ask me anything...">
                  <button id="send-button">Send</button>
@@ -418,19 +418,23 @@
         const dropdownSendButton = document.getElementById('dropdown-send-button');
         const clearButton = document.getElementById('clear-button'); // New clear button
 
+
+    // Display initial message on load
         window.onload = function() {
             // Create the initial bot message
             const initialBotMessage = document.createElement("div");
             initialBotMessage.classList.add("chatbot-msg");
+            initialBotMessage.setAttribute("id", "initial-message"); // Add an ID to identify the initial message
             initialBotMessage.innerHTML = "<strong>Priyesh:</strong> Please wait at least 50 seconds for the first response...";
     
             // Append the initial message to the chat box
             chatBox.appendChild(initialBotMessage);
     
-            // Set a timeout to remove the initial message after 50 seconds
+            // Set a timeout to remove the initial message after 50 seconds if no response has come
             setTimeout(() => {
-                if (chatBox.contains(initialBotMessage)) {
-                    chatBox.removeChild(initialBotMessage);
+                const initialMsg = document.getElementById("initial-message");
+                if (initialMsg && chatBox.contains(initialMsg)) {
+                    chatBox.removeChild(initialMsg);
                 }
             }, 50000); // 50000 milliseconds = 50 seconds
         };
