@@ -410,7 +410,7 @@
         </div>
     </div>
 
-    <script>
+<script>
         const chatBox = document.getElementById('chat-box');
         const userInput = document.getElementById('user-input');
         const sendButton = document.getElementById('send-button');
@@ -418,30 +418,11 @@
         const dropdownSendButton = document.getElementById('dropdown-send-button');
         const clearButton = document.getElementById('clear-button'); // New clear button
 
-
-    // Display initial message on load
-        window.onload = function() {
-            // Create the initial bot message
-            const initialBotMessage = document.createElement("div");
-            initialBotMessage.classList.add("chatbot-msg");
-            initialBotMessage.innerHTML = "<strong>Priyesh:</strong> Please wait at least 50 seconds for the first response...";
-    
-            // Append the initial message to the chat box
-            chatBox.appendChild(initialBotMessage);
-    
-            // Set a timeout to remove the initial message after 50 seconds
-            setTimeout(() => {
-                if (chatBox.contains(initialBotMessage)) {
-                    chatBox.removeChild(initialBotMessage);
-                }
-            }, 50000); // 50000 milliseconds = 50 seconds
-        };
-        
         // Function to send question
         async function sendQuestion(question) {
             const userQuestion = question || userInput.value.trim();
             if (userQuestion) {
-                chatBox.innerHTML += `<div class="user-msg"><strong>You:</strong> ${userQuestion}</div>`;
+                chatBox.innerHTML += <div class="user-msg"><strong>You:</strong> ${userQuestion}</div>;
                 userInput.value = '';
 
                 try {
@@ -456,14 +437,14 @@
                     if (response.ok) {
                         const data = await response.json();
                         const answer = data.response;
-                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Priyesh:</strong> ${answer}</div>`;
+                        chatBox.innerHTML += <div class="chatbot-msg"><strong>Priyesh:</strong> ${answer}</div>;
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
                         const errorMessage = await response.text();
-                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${errorMessage}</div>`;
+                        chatBox.innerHTML += <div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${errorMessage}</div>;
                     }
                 } catch (error) {
-                    chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${error.message}</div>`;
+                    chatBox.innerHTML += <div class="chatbot-msg"><strong>Chatbot:</strong> Error: ${error.message}</div>;
                 }
             }
         }
