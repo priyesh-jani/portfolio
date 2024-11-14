@@ -265,7 +265,7 @@
     }
 
     #send-button {
-        width: 100%; /* Make button full width */
+        width: 60%; /* Make button full width */
         margin-right: 10px;
         padding: 12px;
     }
@@ -384,9 +384,14 @@
 
         <!-- Chat container on the right -->
         <div class="chat-container">
-            <div class="chat-box" id="chat-box"></div>
+            <div class="chat-box" id="chat-box">
+                <!-- Initial message from the bot -->
+                <div class="message bot-message" id="initial-message">
+                    Please wait at least 50 seconds for the first response.
+                </div>
+            </div>
             <div class="input-container">
-                 <input type="text" id="user-input" placeholder="Ask me anything, Please wait at least 50sec for first response...">
+                 <input type="text" id="user-input" placeholder="Ask me anything...">
                  <button id="send-button">Send</button>
                  <button id="clear-button"> <i class="trash-icon"></i></button>
             </div>
