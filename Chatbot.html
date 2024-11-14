@@ -124,6 +124,18 @@
             margin-bottom: 10px;
         }
 
+        .bot-message {
+            background-color: #f1f1f1; /* Light background for bot messages */
+            color: #333;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+            margin: 10px 0;
+            align-self: flex-start; /* Align message to the left */
+            font-style: italic; /* Italicize to distinguish from user messages */
+            font-size: 14px;
+        }
+
         .input-container {
             display: flex;
             align-items: center;
@@ -259,14 +271,14 @@
 
     /* Adjust input and send button for mobile */
     #user-input {
-        width: 100%; /* Make input field full width */
+        width: 80%; /* Make input field full width */
         margin-right: 10px;
         margin-right: 0; /* Remove right margin */
     }
 
     #send-button {
         width: 60%; /* Make button full width */
-        margin-right: 10px;
+        margin-right: 5px;
         padding: 12px;
     }
 
@@ -387,7 +399,7 @@
             <div class="chat-box" id="chat-box">
                 <!-- Initial message from the bot -->
                 <div class="message bot-message" id="initial-message">
-                    Please wait at least 50 seconds for the first response.
+                    Priyesh: Please wait at least 50 seconds for the first response.
                 </div>
             </div>
             <div class="input-container">
