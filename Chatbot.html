@@ -400,6 +400,25 @@
         const questionDropdown = document.getElementById('question-dropdown');
         const dropdownSendButton = document.getElementById('dropdown-send-button');
         const clearButton = document.getElementById('clear-button'); // New clear button
+        let initialMessageTimeout;
+
+    // Function to show initial message
+        function showInitialMessage() {
+            const initialMessageDiv = document.createElement('div');
+            initialMessageDiv.id = 'initial-message';
+            initialMessageDiv.classList.add('chatbot-msg');
+            initialMessageDiv.innerHTML = '<strong>Chatbot:</strong> Please wait at least 50 seconds for the first response.';
+            chatBox.appendChild(initialMessageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+    
+            // Remove the initial message after 30 seconds
+            initialMessageTimeout = setTimeout(() => {
+                initialMessageDiv.remove();
+            }, 30000);
+        }
+    
+        // Show the initial message when the page loads
+        window.addEventListener('load', showInitialMessage);
 
     // Function to show "Priyesh is typing..." message
         function showTypingIndicator() {
