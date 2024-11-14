@@ -134,7 +134,7 @@
         }
 
         #send-button {
-            padding: 10px 20px;
+            padding: 10px 5px;
             background-color: #0066FF;
             color: white;
             border: none;
@@ -360,7 +360,7 @@
             <div class="chat-box" id="chat-box"></div>
             <input type="text" id="user-input" placeholder="Ask me anything, Please wait at least 50sec for first response...">
             <button id="send-button">Send</button>
-            <button id="clear-button">Clear</button>
+            <button id="clear-button"><i class="fa fa-trash"></i></button>
         </div>
     </div>
 
@@ -423,6 +423,8 @@
                 questionDropdown.value = '';
             }
         });
+
+        clearButton.addEventListener('click', clearChat);
     </script>
 </body>
 </html>
