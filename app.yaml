@@ -1,4 +1,4 @@
-runtime: python39  # You can use python39 or other versions
+runtime: python  # You can use python39 or other versions
 entrypoint: gunicorn -b :$PORT main:app
 
 env_variables:
