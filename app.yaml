@@ -1,4 +1,4 @@
-runtime: python  # You can use python39 or other versions
+runtime: python  # No comment here, just the runtime name
 entrypoint: gunicorn -b :$PORT main:app
 
 env_variables:
@@ -9,3 +9,4 @@ handlers:
     static_dir: static/
   - url: /.*  # All other routes will be handled by your app
     script: auto
+
