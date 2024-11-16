@@ -1,8 +1,8 @@
-runtime: python
+runtime: python39
 entrypoint: gunicorn -b :$PORT main:app
 
 env_variables:
-  GOOGLE_CLOUD_PROJECT: My-First-Project
+  GOOGLE_CLOUD_PROJECT: silver-ivy-441919-e7
 
 handlers:
   - url: /static
