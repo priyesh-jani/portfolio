@@ -57,6 +57,7 @@ if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5002))  # Get the PORT from environment or use 5002 as default
     app.run(
         host='0.0.0.0', 
-        port=port, 
-        ssl_context=('/home/priyeshjani25/ssl/cert.pem', '/home/priyeshjani25/ssl/key.pem')
+        port=port
     )# Bind to all addresses and specified port
+
+        <!--ssl_context=('/home/priyeshjani25/ssl/cert.pem', '/home/priyeshjani25/ssl/key.pem')-->
