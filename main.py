@@ -60,4 +60,3 @@ if __name__ == "__main__":
         port=port
     )# Bind to all addresses and specified port
 
-        <!--ssl_context=('/home/priyeshjani25/ssl/cert.pem', '/home/priyeshjani25/ssl/key.pem')-->
