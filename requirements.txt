@@ -1,5 +1,7 @@
-Flask
+flask
 flask-cors
-pandas
+transformers
+torch
 scikit-learn
+pandas
 
