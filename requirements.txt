@@ -4,4 +4,5 @@ transformers
 torch
 scikit-learn
 pandas
+accelerate>=0.26.0
 
