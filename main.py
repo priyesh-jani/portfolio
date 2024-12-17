@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import os
 
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoTokenizer, AutoModelForCausalLM, AutoModelForSeq2SeqLM
 import torch
 
 app = Flask(__name__)
@@ -50,7 +50,8 @@ def get_predefined_answer(user_question, df, question_vectors):
 # Load distilgpt2 model and tokenizer
 model_name = "google/flan-t5-small"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForCausalLM.from_pretrained(model_name)
+model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+##model = AutoModelForCausalLM.from_pretrained(model_name)
 
 def get_answer_from_llm(user_question):
     inputs = tokenizer.encode(user_question, return_tensors="pt")
