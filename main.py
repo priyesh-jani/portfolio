@@ -48,9 +48,13 @@ def get_predefined_answer(user_question, df, question_vectors):
     return df.iloc[closest_idx]["response"]
 
 # Load distilgpt2 model and tokenizer
-model_name = "google/flan-t5-small"
+model_name = "facebook/blenderbot-400M-distill"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
-model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
+model = AutoModelForSeq2SeqLM.from_pretrained(
+    model_name, 
+    torch_dtype=torch.float16,  # Use half-precision for memory savings
+    device_map="cpu"  # Force CPU usage
+)
 ##model = AutoModelForCausalLM.from_pretrained(model_name)
 
 def get_answer_from_llm(user_question):
