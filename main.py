@@ -48,7 +48,7 @@ def get_predefined_answer(user_question, df, question_vectors):
     return df.iloc[closest_idx]["response"]
 
 # Load distilgpt2 model and tokenizer
-model_name = "facebook/blenderbot-400M-distill"
+model_name = "distilgpt2"
 tokenizer = AutoTokenizer.from_pretrained(model_name)
 ##model = AutoModelForSeq2SeqLM.from_pretrained(model_name)
 model = AutoModelForCausalLM.from_pretrained(
