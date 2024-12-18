@@ -110,6 +110,9 @@
     </div>
 
     <script>
+        const UPLOAD_ENDPOINT = "https://portfolio-1-4vkx.onrender.com/upload";
+        const ASK_ENDPOINT = "https://portfolio-1-4vkx.onrender.com/ask";
+
         const uploadForm = document.getElementById("upload-form");
         const visualizationSection = document.getElementById("visualization-section");
         const visualizationImages = document.getElementById("visualization-images");
@@ -124,8 +127,15 @@
             event.preventDefault();
 
             const formData = new FormData(uploadForm);
+            insightsSection.style.display = "none";
+            visualizationSection.style.display = "none";
+
             try {
-                const response = await fetch("/upload", {
+                // Show loading message
+                insightsContent.textContent = "Analyzing data, please wait...";
+                insightsSection.style.display = "block";
+
+                const response = await fetch(UPLOAD_ENDPOINT, {
                     method: "POST",
                     body: formData,
                 });
@@ -135,7 +145,6 @@
                     const { insights, charts } = data;
 
                     // Display insights
-                    insightsSection.style.display = "block";
                     insightsContent.textContent = insights;
 
                     // Display visualizations
@@ -143,13 +152,14 @@
                     visualizationImages.innerHTML = "";
                     charts.forEach((chart) => {
                         const img = document.createElement("img");
-                        img.src = chart;
+                        img.src = `https://portfolio-1-4vkx.onrender.com/${chart}`;
                         visualizationImages.appendChild(img);
                     });
                 } else {
-                    console.error("Error analyzing file");
+                    insightsContent.textContent = "Error analyzing file.";
                 }
             } catch (error) {
+                insightsContent.textContent = "An error occurred while analyzing the file.";
                 console.error("Error:", error);
             }
         });
@@ -162,7 +172,7 @@
                 userInput.value = "";
 
                 try {
-                    const response = await fetch("/ask", {
+                    const response = await fetch(ASK_ENDPOINT, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
@@ -176,9 +186,10 @@
                         chatBox.innerHTML += `<div><strong>Chatbot:</strong> ${answer}</div>`;
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
-                        console.error("Error processing question");
+                        chatBox.innerHTML += `<div><strong>Chatbot:</strong> Error processing your question.</div>`;
                     }
                 } catch (error) {
+                    chatBox.innerHTML += `<div><strong>Chatbot:</strong> An error occurred while processing your question.</div>`;
                     console.error("Error:", error);
                 }
             }
