@@ -50,6 +50,7 @@
             flex: 1;
             min-width: 300px;
             order: 2;
+            margin-top: 20px;
         }
 
         .insights-container {
@@ -130,16 +131,17 @@
                 order: 1;
             }
 
+            .chat-container {
+                order: 4;
+                margin-top: 10px;
+            }
+
             .insights-container {
                 order: 2;
             }
 
             .visualization-container {
                 order: 3;
-            }
-
-            .chat-container {
-                order: 4;
             }
         }
     </style>
@@ -184,15 +186,15 @@
                     <input type="file" id="file-upload" name="file" required>
                     <button type="submit" class="btn btn-primary">Upload and Analyze</button>
                 </form>
-            </div>
 
-            <!-- Chat Section -->
-            <div class="chat-container">
-                <div class="chat-box" id="chat-box"></div>
-                <div class="input-container">
-                    <input type="text" id="user-input" placeholder="Ask me anything...">
-                    <button id="send-button">Send</button>
-                    <button id="clear-button">Clear</button>
+                <!-- Chat Section -->
+                <div class="chat-container">
+                    <div class="chat-box" id="chat-box"></div>
+                    <div class="input-container">
+                        <input type="text" id="user-input" placeholder="Ask me anything...">
+                        <button id="send-button">Send</button>
+                        <button id="clear-button">Clear</button>
+                    </div>
                 </div>
             </div>
 
