@@ -67,32 +67,49 @@ def analyze_data(df):
     return analysis
 
 def suggest_and_generate_visualizations(df, analysis):
-    """Generate personalized visualizations."""
+    """Generate personalized visualizations and save them to static folder."""
     print("\nGenerating Visualizations...")
+    chart_files = []  # List to store generated chart filenames
+
+    # Ensure the static folder exists
+    static_folder = "static"
+    os.makedirs(static_folder, exist_ok=True)
 
     # Bar chart for categorical vs numeric
     if analysis["categorical"] and analysis["numeric"]:
+        filename = os.path.join(static_folder, "bar_chart.png")
         plt.figure(figsize=(8, 5))
         sns.barplot(data=df, x=analysis["categorical"][0], y=analysis["numeric"][0])
         plt.title(f"{analysis['numeric'][0]} by {analysis['categorical'][0]}")
         plt.tight_layout()
-        plt.savefig("static/bar_chart.png")  # Save the chart for display
+        plt.savefig(filename)
+        plt.close()
+        chart_files.append(filename)
 
     # Scatter plot for numeric correlations
     if len(analysis["numeric"]) > 1:
+        filename = os.path.join(static_folder, "scatter_plot.png")
         plt.figure(figsize=(8, 5))
         sns.scatterplot(data=df, x=analysis["numeric"][0], y=analysis["numeric"][1])
         plt.title(f"{analysis['numeric'][1]} vs {analysis['numeric'][0]}")
         plt.tight_layout()
-        plt.savefig("static/scatter_plot.png")  # Save the chart for display
+        plt.savefig(filename)
+        plt.close()
+        chart_files.append(filename)
 
     # Distribution plots for numeric columns
     for col in analysis["numeric"]:
+        filename = os.path.join(static_folder, f"distribution_{col}.png")
         plt.figure(figsize=(8, 5))
         sns.histplot(df[col], kde=True)
         plt.title(f"Distribution of {col}")
         plt.tight_layout()
-        plt.savefig(f"static/{col}_distribution.png")  # Save the chart for display
+        plt.savefig(filename)
+        plt.close()
+        chart_files.append(filename)
+
+    # Return list of generated chart file paths
+    return chart_files
 
 def generate_insights_with_llm(df, analysis):
     """Generate insights using LLM."""
@@ -129,8 +146,8 @@ def answer_question_with_llm(question, df):
 
 # Flask Routes
 @app.route("/")
-def index():
-    return render_template("index.html")
+def home():
+    return "VizAI API is running!"
 
 @app.route("/upload", methods=["POST"])
 def upload_file():
