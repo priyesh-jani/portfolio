@@ -7,39 +7,7 @@
     <title>Data Analysis Chatbot</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
-        /* Updated styles for layout changes */
-
-        /* Navbar */
-        .navbar-default {
-            background-color: white !important;
-            border-color: rgba(34, 34, 34, 0.5);
-        }
-
-        .navbar-header .navbar-brand {
-            color: #EB5E28 !important;
-            font-weight: bold !important;
-            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
-            text-transform: uppercase !important;
-        }
-
-        .navbar-header .navbar-brand:hover,
-        .navbar-header .navbar-brand:focus {
-            color: #DC2F02 !important;
-        }
-
-        .nav > li > a {
-            color: #000000 !important;
-            font-weight: bold !important;
-            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
-            text-transform: uppercase !important;
-        }
-
-        .nav > li > a:hover,
-        .nav > li > a:focus {
-            color: #044DBA !important;
-        }
-
-        /* Body and typography */
+        /* General styling */
         body {
             background-color: #f8f9fa;
             font-family: 'Roboto', sans-serif;
@@ -58,27 +26,42 @@
             color: #6c757d;
         }
 
-        /* Main Layout */
-        .container {
-            margin-top: 60px;
-        }
-
+        /* Layout container */
         .main-wrapper {
             display: flex;
             flex-wrap: wrap;
             gap: 20px;
+            margin-top: 30px;
         }
 
-        .upload-section,
+        .upload-section {
+            flex: 1;
+            min-width: 300px;
+            order: 1;
+        }
+
+        .upload-section form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
         .chat-container {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
+            order: 2;
         }
 
-        .insights-container,
+        .insights-container {
+            flex: 1;
+            min-width: 300px;
+            order: 3;
+        }
+
         .visualization-container {
             flex: 1;
-            min-width: 280px;
+            min-width: 300px;
+            order: 4;
         }
 
         /* Card styling */
@@ -89,17 +72,28 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Input and Button */
+        .chat-box {
+            min-height: 300px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+        }
+
         #user-input {
             flex: 1;
             padding: 10px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-right: 5px;
         }
 
-        #send-button,
-        #clear-button {
+        #send-button {
             padding: 10px 15px;
             background-color: #0066FF;
             color: white;
@@ -113,21 +107,17 @@
         }
 
         #clear-button {
+            padding: 10px 15px;
             background-color: #FF4C4C;
+            color: white;
+            border: none;
+            border-radius: 4px;
             margin-left: 5px;
+            cursor: pointer;
         }
 
         #clear-button:hover {
             background-color: #FF1F1F;
-        }
-
-        .trash-icon {
-            font-size: 18px;
-            color: white;
-            background: url('https://cdn-icons-png.flaticon.com/512/1214/1214428.png') no-repeat center center;
-            background-size: contain;
-            width: 24px;
-            height: 24px;
         }
 
         /* Responsive Design */
@@ -136,13 +126,20 @@
                 flex-direction: column;
             }
 
-            .insights-container,
-            .visualization-container {
+            .upload-section {
+                order: 1;
+            }
+
+            .insights-container {
                 order: 2;
             }
 
-            .upload-section {
-                order: 1;
+            .visualization-container {
+                order: 3;
+            }
+
+            .chat-container {
+                order: 4;
             }
         }
     </style>
@@ -181,7 +178,7 @@
 
         <div class="main-wrapper">
             <!-- Upload Section -->
-            <div class="upload-section card">
+            <div class="upload-section">
                 <form id="upload-form" enctype="multipart/form-data">
                     <label for="file-upload">Upload your CSV file:</label>
                     <input type="file" id="file-upload" name="file" required>
@@ -190,12 +187,12 @@
             </div>
 
             <!-- Chat Section -->
-            <div class="chat-container card">
-                <div class="chat-box" id="chat-box" style="height: 300px; overflow-y: auto;"></div>
+            <div class="chat-container">
+                <div class="chat-box" id="chat-box"></div>
                 <div class="input-container">
-                    <input type="text" id="user-input" placeholder="Ask me anything..." />
+                    <input type="text" id="user-input" placeholder="Ask me anything...">
                     <button id="send-button">Send</button>
-                    <button id="clear-button"><i class="trash-icon"></i></button>
+                    <button id="clear-button">Clear</button>
                 </div>
             </div>
 
