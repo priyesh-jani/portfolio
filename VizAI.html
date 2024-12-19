@@ -121,6 +121,8 @@
         const chatBox = document.getElementById("chat-box");
         const userInput = document.getElementById("user-input");
         const sendButton = document.getElementById("send-button");
+        
+        let currentFileKey = null; // To store the file key for Q&A
 
         // Handle file upload and analysis
         uploadForm.addEventListener("submit", async (event) => {
@@ -145,6 +147,9 @@
 
                     // Display insights
                     insightsContent.textContent = insights;
+
+                    // Store the file key for Q&A
+                    currentFileKey = formData.get("file").name;
 
                     // Display visualizations
                     visualizationSection.style.display = "block";
@@ -176,7 +181,7 @@
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ question }),
+                        body: JSON.stringify({ question, file_path: currentFileKey }),
                     });
 
                     if (response.ok) {
@@ -190,7 +195,9 @@
                 } catch (error) {
                     chatBox.innerHTML += `<div><strong>Chatbot:</strong> An error occurred while processing your question.</div>`;
                     console.error("Error:", error);
-                }
+                }  
+            } else if (!currentFileKey) {
+                chatBox.innerHTML += `<div><strong>Chatbot:</strong> Please upload a file first.</div>`;  
             }
         });
     </script>
