@@ -7,12 +7,49 @@
     <title>Data Analysis Chatbot</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
-        /* Your existing CSS styles */
+        /* Updated styles based on the provided page */
+
+        /* Navbar */
+        .navbar-default {
+            background-color: white !important;
+            border-color: rgba(34, 34, 34, 0.5);
+        }
+
+        .navbar-header .navbar-brand {
+            color: #EB5E28 !important;
+            font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            text-transform: uppercase !important;
+        }
+
+        .navbar-header .navbar-brand:hover,
+        .navbar-header .navbar-brand:focus {
+            color: #DC2F02 !important;
+        }
+
+        .nav > li > a {
+            color: #000000 !important;
+            font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            text-transform: uppercase !important;
+        }
+
+        .nav > li > a:hover,
+        .nav > li > a:focus {
+            color: #044DBA !important;
+        }
+
+        /* Body and typography */
         body {
             background-color: #f8f9fa;
             font-family: 'Roboto', sans-serif;
         }
 
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+        }
+
+        /* Chatbot styling */
         .chat-wrapper {
             display: flex;
             gap: 20px;
@@ -26,16 +63,58 @@
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             overflow-y: auto;
+            height: 100%;
         }
 
         .chat-container {
-            flex: 2;
+            flex: 1;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            min-height: 350px;
         }
 
+        .chat-box {
+            min-height: 300px;
+            height: auto;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #user-input {
+            width: calc(100% - 90px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 5px;
+            box-sizing: border-box;
+        }
+
+        #send-button {
+            padding: 10px 15px;
+            background-color: #0066FF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #send-button:hover {
+            background-color: #044DBA;
+        }
+
+        /* Visualizations */
         .visualization-container {
             margin-top: 20px;
             background-color: white;
@@ -51,6 +130,7 @@
             margin-top: 10px;
         }
 
+        /* Insights */
         .insights-container {
             margin-top: 20px;
             background-color: white;
@@ -63,39 +143,22 @@
             margin-bottom: 10px;
         }
 
-        /* New styles for enhancements */
-        .highlight {
-            background-color: #e9f7ff;
-            padding: 10px 15px;
-            border-left: 5px solid #007bff;
-            border-radius: 4px;
-        }
+        /* Mobile responsive styles */
+        @media (max-width: 768px) {
+            .chat-wrapper {
+                display: block;
+                padding: 10px;
+            }
 
-        .btn-primary {
-            transition: all 0.3s ease-in-out;
-        }
+            .question-list,
+            .chat-container {
+                width: 100%;
+                margin-bottom: 15px;
+            }
 
-        .btn-primary:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-
-        .cta-section {
-            text-align: center;
-            margin-top: 40px;
-        }
-
-        .cta-section a {
-            text-decoration: none;
-            color: #fff;
-            background-color: #007bff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-        }
-
-        .cta-section a:hover {
-            background-color: #0056b3;
+            .chat-box {
+                min-height: 200px;
+            }
         }
     </style>
 </head>
@@ -128,19 +191,7 @@
     <!-- Main Content -->
     <div class="container" style="margin-top: 60px;">
         <h1>Analyze Your Data Like Never Before</h1>
-        <p class="highlight">Leverage the power of AI to transform your datasets into actionable insights and dynamic
-            visualizations.</p>
-
-        <!-- Key Features Section -->
-        <div class="features-section" style="margin-top: 30px;">
-            <h2>Key Features</h2>
-            <ul>
-                <li>Upload and analyze your data effortlessly.</li>
-                <li>Generate insights and charts with a single click.</li>
-                <li>Ask questions in natural language and get accurate responses.</li>
-                <li>Get interactive visualizations tailored to your needs.</li>
-            </ul>
-        </div>
+        <p class="highlight">Leverage the power of AI to transform your datasets into actionable insights and dynamic visualizations.</p>
 
         <!-- File Upload Section -->
         <form id="upload-form" enctype="multipart/form-data" style="margin-top: 20px;">
@@ -165,10 +216,10 @@
         <div class="chat-wrapper">
             <!-- Chat container on the right -->
             <div class="chat-container">
-                <div class="chat-box" id="chat-box" style="height: 400px; overflow-y: auto;"></div>
-                <div class="input-container" style="margin-top: 10px;">
-                    <input type="text" id="user-input" placeholder="Ask me anything..." class="form-control">
-                    <button id="send-button" class="btn btn-primary" style="margin-top: 10px;">Send</button>
+                <div class="chat-box" id="chat-box"></div>
+                <div class="input-container">
+                    <input type="text" id="user-input" placeholder="Ask me anything..." />
+                    <button id="send-button">Send</button>
                 </div>
             </div>
         </div>
