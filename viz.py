@@ -1,10 +1,17 @@
 from flask import Flask, request, jsonify, render_template
+from flask import session
+from flask_session import Session
+from flask_cors import CORS  # Import CORS
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
+from werkzeug.utils import secure_filename
+import matplotlib
+matplotlib.use('Agg')
 import seaborn as sns
 import numpy as np
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
+
 
 # Load the LLM
 try:
@@ -19,9 +26,17 @@ except Exception as e:
 
 # Flask setup
 app = Flask(__name__)
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": "*"}})  # Enable credentials for CORS
 UPLOAD_FOLDER = "uploads"
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+
+app.config["SESSION_TYPE"] = "filesystem"
+app.config["SESSION_PERMANENT"] = True  # Ensure the session persists
+app.secret_key = "supersecretkey"  # Add a secret key for session signing
+Session(app)
+
+uploaded_data_cache = {}
 
 # Your exact code begins here
 def process_file(file_path):
@@ -65,6 +80,8 @@ def analyze_data(df):
         analysis["outliers"][col] = outliers
 
     return analysis
+
+import os
 
 def suggest_and_generate_visualizations(df, analysis):
     """Generate personalized visualizations and save them to static folder."""
@@ -149,50 +166,57 @@ def answer_question_with_llm(question, df):
 def home():
     return "VizAI API is running!"
 
-@app.route("/upload", methods=["POST"])
+@app.route('/upload', methods=['POST'])
 def upload_file():
-    if "file" not in request.files:
-        return jsonify({"error": "No file uploaded"}), 400
-
-    file = request.files["file"]
-    if file.filename == "":
-        return jsonify({"error": "No selected file"}), 400
-
-    file_path = os.path.join(app.config["UPLOAD_FOLDER"], file.filename)
+    file = request.files['file']
+    filename = secure_filename(file.filename)
+    file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
     file.save(file_path)
 
-    # Process and analyze the file
     df = process_file(file_path)
     if df is None:
-        return jsonify({"error": "Failed to process the file"}), 500
+        return jsonify({"error": "Invalid file format."}), 400
 
     analysis = analyze_data(df)
-    suggest_and_generate_visualizations(df, analysis)
+    charts = suggest_and_generate_visualizations(df, analysis)
     insights = generate_insights_with_llm(df, analysis)
 
-    return jsonify({
-        "insights": insights,
-        "charts": [
-            "static/bar_chart.png",
-            "static/scatter_plot.png"
-        ]
-    })
+    file_key = os.path.basename(file_path)
+    uploaded_data_cache[file_key] = df
+    session["current_file_key"] = file_key
+    print(f"Session current_file_key set to: {file_key}")  # Debug log
+    print(f"Session after /upload: {dict(session)}")
+    print(f"Session after /upload: {session.items()}")
+
+    # Send response back to the frontend
+    return jsonify({"insights": insights, "charts": [f"static/{os.path.basename(chart)}" for chart in charts]})
 
 @app.route("/ask", methods=["POST"])
 def ask_question():
+    print(f"Session Keys Available: {list(session.keys())}")  # Log all session keys
+    print(f"Session current_file_key: {session.get('current_file_key')}")  # Debug log
     data = request.json
     question = data.get("question")
-    file_path = data.get("file_path")  # Path to the uploaded file
+    file_key = session.get("current_file_key")  # Retrieve the current file key
 
-    if not question or not file_path:
-        return jsonify({"error": "Invalid request"}), 400
+    if not question:
+        return jsonify({"error": "Question is required."}), 400
 
-    df = process_file(file_path)
+    if not file_key or file_key not in uploaded_data_cache:
+        return jsonify({"error": "No file is currently loaded. Please upload a file first."}), 400
+
+    # Retrieve the DataFrame from the cache
+    df = uploaded_data_cache[file_key]
     if df is None:
         return jsonify({"error": "Failed to process the file"}), 500
 
+    # Answer the question using LLM
     answer = answer_question_with_llm(question, df)
     return jsonify({"answer": answer})
+
+@app.route('/debug-session', methods=['GET'])
+def debug_session():
+    return jsonify(dict(session))
 
 if __name__ == "__main__":
     app.run(debug=True)
