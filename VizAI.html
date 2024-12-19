@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Analysis Chatbot</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
-        /* Your existing CSS styles remain intact */
+        /* Your existing CSS styles */
         body {
             background-color: #f8f9fa;
             font-family: 'Roboto', sans-serif;
@@ -61,14 +62,51 @@
         .insights-container h4 {
             margin-bottom: 10px;
         }
+
+        /* New styles for enhancements */
+        .highlight {
+            background-color: #e9f7ff;
+            padding: 10px 15px;
+            border-left: 5px solid #007bff;
+            border-radius: 4px;
+        }
+
+        .btn-primary {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            transform: scale(1.05);
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .cta-section a {
+            text-decoration: none;
+            color: #fff;
+            background-color: #007bff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .cta-section a:hover {
+            background-color: #0056b3;
+        }
     </style>
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -89,7 +127,20 @@
 
     <!-- Main Content -->
     <div class="container" style="margin-top: 60px;">
-        <h1>Automatic Insights Generation Chatbot</h1>
+        <h1>Analyze Your Data Like Never Before</h1>
+        <p class="highlight">Leverage the power of AI to transform your datasets into actionable insights and dynamic
+            visualizations.</p>
+
+        <!-- Key Features Section -->
+        <div class="features-section" style="margin-top: 30px;">
+            <h2>Key Features</h2>
+            <ul>
+                <li>Upload and analyze your data effortlessly.</li>
+                <li>Generate insights and charts with a single click.</li>
+                <li>Ask questions in natural language and get accurate responses.</li>
+                <li>Get interactive visualizations tailored to your needs.</li>
+            </ul>
+        </div>
 
         <!-- File Upload Section -->
         <form id="upload-form" enctype="multipart/form-data" style="margin-top: 20px;">
