@@ -112,7 +112,7 @@
     <script>
         const UPLOAD_ENDPOINT = "http://127.0.0.1:5000/upload";
         const ASK_ENDPOINT = "http://127.0.0.1:5000/ask";
-
+    
         const uploadForm = document.getElementById("upload-form");
         const visualizationSection = document.getElementById("visualization-section");
         const visualizationImages = document.getElementById("visualization-images");
@@ -121,36 +121,36 @@
         const chatBox = document.getElementById("chat-box");
         const userInput = document.getElementById("user-input");
         const sendButton = document.getElementById("send-button");
-        
+    
         let currentFileKey = null; // To store the file key for Q&A
-
+    
         // Handle file upload and analysis
         uploadForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-
+    
             const formData = new FormData(uploadForm);
             insightsSection.style.display = "none";
             visualizationSection.style.display = "none";
-
+    
             try {
                 insightsContent.textContent = "Analyzing data, please wait...";
                 insightsSection.style.display = "block";
-
+    
                 const response = await fetch(UPLOAD_ENDPOINT, {
                     method: "POST",
                     body: formData,
                 });
-
+    
                 if (response.ok) {
                     const data = await response.json();
                     const { insights, charts } = data;
-
+    
                     // Display insights
                     insightsContent.textContent = insights;
-
+    
                     // Store the file key for Q&A
                     currentFileKey = formData.get("file").name;
-
+    
                     // Display visualizations
                     visualizationSection.style.display = "block";
                     visualizationImages.innerHTML = "";
@@ -167,23 +167,23 @@
                 console.error("Error:", error);
             }
         });
-
+    
         // Handle user question submission
         sendButton.addEventListener("click", async () => {
             const question = userInput.value.trim();
-            if (question) {
+            if (question && currentFileKey) {
                 chatBox.innerHTML += `<div><strong>You:</strong> ${question}</div>`;
                 userInput.value = "";
-
+    
                 try {
                     const response = await fetch(ASK_ENDPOINT, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },
-                        body: JSON.stringify({ question, file_path: currentFileKey }),
+                        body: JSON.stringify({ question }),
                     });
-
+    
                     if (response.ok) {
                         const data = await response.json();
                         const answer = data.answer;
@@ -201,5 +201,6 @@
             }
         });
     </script>
+
 </body>
 </html>
