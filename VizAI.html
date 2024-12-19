@@ -7,7 +7,9 @@
     <title>Data Analysis Chatbot</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
-        /* Navbar styles */
+        /* Updated styles for layout changes */
+
+        /* Navbar */
         .navbar-default {
             background-color: white !important;
             border-color: rgba(34, 34, 34, 0.5);
@@ -20,67 +22,74 @@
             text-transform: uppercase !important;
         }
 
+        .navbar-header .navbar-brand:hover,
+        .navbar-header .navbar-brand:focus {
+            color: #DC2F02 !important;
+        }
+
         .nav > li > a {
             color: #000000 !important;
             font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
             text-transform: uppercase !important;
         }
 
-        /* Body and layout */
+        .nav > li > a:hover,
+        .nav > li > a:focus {
+            color: #044DBA !important;
+        }
+
+        /* Body and typography */
         body {
             background-color: #f8f9fa;
             font-family: 'Roboto', sans-serif;
         }
 
+        h1 {
+            font-size: 2.5em;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        p.highlight {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 1.2em;
+            color: #6c757d;
+        }
+
+        /* Main Layout */
         .container {
             margin-top: 60px;
         }
 
-        .chat-wrapper {
+        .main-wrapper {
             display: flex;
-            flex-direction: row;
+            flex-wrap: wrap;
             gap: 20px;
-            align-items: flex-start;
         }
 
+        .upload-section,
         .chat-container {
             flex: 1;
-            padding: 20px;
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            min-height: 350px;
-        }
-
-        .insights-visualizations-container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
+            min-width: 280px;
         }
 
         .insights-container,
         .visualization-container {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        /* Card styling */
+        .card {
             background-color: white;
-            padding: 15px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
             border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .chat-box {
-            min-height: 300px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 10px;
-            overflow-y: auto;
-            margin-bottom: 10px;
-        }
-
-        .input-container {
-            display: flex;
-            align-items: center;
-        }
-
+        /* Input and Button */
         #user-input {
             flex: 1;
             padding: 10px;
@@ -89,7 +98,8 @@
             margin-right: 5px;
         }
 
-        #send-button {
+        #send-button,
+        #clear-button {
             padding: 10px 15px;
             background-color: #0066FF;
             color: white;
@@ -103,15 +113,7 @@
         }
 
         #clear-button {
-            padding: 12px;
             background-color: #FF4C4C;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             margin-left: 5px;
         }
 
@@ -121,30 +123,26 @@
 
         .trash-icon {
             font-size: 18px;
-            width: 24px;
-            height: 24px;
+            color: white;
             background: url('https://cdn-icons-png.flaticon.com/512/1214/1214428.png') no-repeat center center;
             background-size: contain;
+            width: 24px;
+            height: 24px;
         }
 
-        .download-btn {
-            margin-top: 10px;
-            padding: 8px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .download-btn:hover {
-            background-color: #218838;
-        }
-
+        /* Responsive Design */
         @media (max-width: 768px) {
-            .chat-wrapper {
+            .main-wrapper {
                 flex-direction: column;
+            }
+
+            .insights-container,
+            .visualization-container {
+                order: 2;
+            }
+
+            .upload-section {
+                order: 1;
             }
         }
     </style>
@@ -155,26 +153,45 @@
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand page-scroll" href="index.html">Priyesh Jani</a>
             </div>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a class="page-scroll" href="blogs.html">BLOGS</a></li>
-                <li><a class="page-scroll" href="Chatbot.html">CHATBOT</a></li>
-                <li><a class="page-scroll" href="index.html#portfolio">PORTFOLIO</a></li>
-                <li><a class="page-scroll" href="index.html#contact">CONTACT</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a class="page-scroll" href="blogs.html">BLOGS</a></li>
+                    <li><a class="page-scroll" href="Chatbot.html">CHATBOT</a></li>
+                    <li><a class="page-scroll" href="index.html#portfolio">PORTFOLIO</a></li>
+                    <li><a class="page-scroll" href="index.html#contact">CONTACT</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <!-- Main Content -->
     <div class="container">
         <h1>Analyze Your Data Like Never Before</h1>
-        <p>Leverage the power of AI to transform your datasets into actionable insights and dynamic visualizations.</p>
+        <p class="highlight">Leverage the power of AI to transform your datasets into actionable insights and dynamic
+            visualizations.</p>
 
-        <div class="chat-wrapper">
-            <!-- Chat Box -->
-            <div class="chat-container">
-                <div class="chat-box" id="chat-box"></div>
+        <div class="main-wrapper">
+            <!-- Upload Section -->
+            <div class="upload-section card">
+                <form id="upload-form" enctype="multipart/form-data">
+                    <label for="file-upload">Upload your CSV file:</label>
+                    <input type="file" id="file-upload" name="file" required>
+                    <button type="submit" class="btn btn-primary">Upload and Analyze</button>
+                </form>
+            </div>
+
+            <!-- Chat Section -->
+            <div class="chat-container card">
+                <div class="chat-box" id="chat-box" style="height: 300px; overflow-y: auto;"></div>
                 <div class="input-container">
                     <input type="text" id="user-input" placeholder="Ask me anything..." />
                     <button id="send-button">Send</button>
@@ -182,20 +199,17 @@
                 </div>
             </div>
 
-            <!-- Insights and Visualizations -->
-            <div class="insights-visualizations-container">
-                <!-- Insights -->
-                <div id="insights-section" class="insights-container" style="display: none;">
-                    <h4>Data Insights</h4>
-                    <p id="insights-content"></p>
-                </div>
+            <!-- Insights Section -->
+            <div id="insights-section" class="insights-container card" style="display: none;">
+                <h4>Data Insights</h4>
+                <p id="insights-content"></p>
+            </div>
 
-                <!-- Visualizations -->
-                <div id="visualization-section" class="visualization-container" style="display: none;">
-                    <h4>Generated Visualizations</h4>
-                    <div id="visualization-images"></div>
-                    <a id="download-btn" href="#" class="download-btn">Download Visualizations</a>
-                </div>
+            <!-- Visualizations Section -->
+            <div id="visualization-section" class="visualization-container card" style="display: none;">
+                <h4>Generated Visualizations</h4>
+                <div id="visualization-images"></div>
+                <button id="download-button" class="btn btn-primary" style="margin-top: 10px;">Download Visualizations</button>
             </div>
         </div>
     </div>
