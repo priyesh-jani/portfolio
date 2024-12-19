@@ -139,6 +139,7 @@
                 const response = await fetch(UPLOAD_ENDPOINT, {
                     method: "POST",
                     body: formData,
+                    credentials: "include",
                 });
     
                 if (response.ok) {
@@ -182,6 +183,7 @@
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify({ question }),
+                        credentials: "include", // Allow session cookies
                     });
     
                     if (response.ok) {
