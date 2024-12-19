@@ -131,7 +131,6 @@
             visualizationSection.style.display = "none";
 
             try {
-                // Show loading message
                 insightsContent.textContent = "Analyzing data, please wait...";
                 insightsSection.style.display = "block";
 
@@ -152,7 +151,7 @@
                     visualizationImages.innerHTML = "";
                     charts.forEach((chart) => {
                         const img = document.createElement("img");
-                        img.src = `http://127.0.0.1:5000/static/${chart}`;
+                        img.src = `http://127.0.0.1:5000/${chart}`;
                         visualizationImages.appendChild(img);
                     });
                 } else {
