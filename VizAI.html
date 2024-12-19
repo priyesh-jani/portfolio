@@ -110,8 +110,8 @@
     </div>
 
     <script>
-        const UPLOAD_ENDPOINT = "https://portfolio-1-4vkx.onrender.com/upload";
-        const ASK_ENDPOINT = "https://portfolio-1-4vkx.onrender.com/ask";
+        const UPLOAD_ENDPOINT = "http://127.0.0.1:5000/upload";
+        const ASK_ENDPOINT = "http://127.0.0.1:5000/ask";
 
         const uploadForm = document.getElementById("upload-form");
         const visualizationSection = document.getElementById("visualization-section");
@@ -152,7 +152,7 @@
                     visualizationImages.innerHTML = "";
                     charts.forEach((chart) => {
                         const img = document.createElement("img");
-                        img.src = `https://portfolio-1-4vkx.onrender.com/${chart}`;
+                        img.src = `http://127.0.0.1:5000/${chart}`;
                         visualizationImages.appendChild(img);
                     });
                 } else {
