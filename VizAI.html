@@ -11,6 +11,8 @@
         body {
             background-color: #f8f9fa;
             font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         h1 {
@@ -28,39 +30,38 @@
 
         /* Layout container */
         .main-wrapper {
-            display: flex;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 2fr; /* Left: 1fr, Right: 2fr */
             gap: 20px;
             margin-top: 30px;
         }
 
+        .upload-chat-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .insights-visualization-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
         .upload-section {
-            flex: 1 1 300px; /* Flex basis of 300px with flexibility */
             order: 1;
         }
 
-        .upload-section form {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
         .chat-container {
-            flex: 1 1 300px;
             order: 2;
-            margin-top: 20px;
         }
 
-         .insights-container {
-            flex: 2 1 300px; /* Takes more space on desktop view */
+        .insights-container {
             order: 3;
-            margin-bottom: 1rem;
         }
-        
+
         .visualization-container {
-            flex: 2 1 300px;
             order: 4;
-            margin-top: 0;
         }
 
         /* Card styling */
@@ -122,24 +123,7 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .main-wrapper {
-                flex-direction: column;
-            }
-
-            .upload-section {
-                order: 1;
-            }
-
-            .chat-container {
-                order: 4;
-                margin-top: 10px;
-            }
-
-            .insights-container {
-                order: 2;
-            }
-
-            .visualization-container {
-                order: 3;
+                grid-template-columns: 1fr; /* Single-column layout */
             }
         }
     </style>
@@ -177,16 +161,19 @@
             visualizations.</p>
 
         <div class="main-wrapper">
-            <!-- Upload Section -->
-            <div class="upload-section">
-                <form id="upload-form" enctype="multipart/form-data">
-                    <label for="file-upload">Upload your CSV file:</label>
-                    <input type="file" id="file-upload" name="file" required>
-                    <button type="submit" class="btn btn-primary">Upload and Analyze</button>
-                </form>
+            <!-- Left Side -->
+            <div class="upload-chat-wrapper">
+                <!-- Upload Section -->
+                <div class="upload-section card">
+                    <form id="upload-form" enctype="multipart/form-data">
+                        <label for="file-upload">Upload your CSV file:</label>
+                        <input type="file" id="file-upload" name="file" required>
+                        <button type="submit" class="btn btn-primary">Upload and Analyze</button>
+                    </form>
+                </div>
 
                 <!-- Chat Section -->
-                <div class="chat-container">
+                <div class="chat-container card">
                     <div class="chat-box" id="chat-box"></div>
                     <div class="input-container">
                         <input type="text" id="user-input" placeholder="Ask me anything...">
@@ -196,17 +183,20 @@
                 </div>
             </div>
 
-            <!-- Insights Section -->
-            <div id="insights-section" class="insights-container card" style="display: none;">
-                <h4>Data Insights</h4>
-                <p id="insights-content"></p>
-            </div>
+            <!-- Right Side -->
+            <div class="insights-visualization-wrapper">
+                <!-- Insights Section -->
+                <div id="insights-section" class="insights-container card" style="display: none;">
+                    <h4>Data Insights</h4>
+                    <p id="insights-content"></p>
+                </div>
 
-            <!-- Visualizations Section -->
-            <div id="visualization-section" class="visualization-container card" style="display: none;">
-                <h4>Generated Visualizations</h4>
-                <div id="visualization-images"></div>
-                <button id="download-button" class="btn btn-primary" style="margin-top: 10px;">Download Visualizations</button>
+                <!-- Visualizations Section -->
+                <div id="visualization-section" class="visualization-container card" style="display: none;">
+                    <h4>Generated Visualizations</h4>
+                    <div id="visualization-images"></div>
+                    <button id="download-button" class="btn btn-primary" style="margin-top: 10px;">Download Visualizations</button>
+                </div>
             </div>
         </div>
     </div>
