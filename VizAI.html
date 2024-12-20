@@ -85,29 +85,21 @@
             font-weight: bold;
         }
 
-        .insights-container {
-            order: 3;
-        }
-
-        .visualization-container {
-            order: 4;
-        }
-
-        /* Card styling */
-        .card {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
         .chat-box {
             min-height: 300px;
+            max-height: 400px;
             border: 1px solid #ddd;
             border-radius: 4px;
             padding: 10px;
-            overflow-y: auto;
+            overflow-y: auto; /* Enable scrolling for overflowing content */
+            word-wrap: break-word; /* Break long words */
+        }
+
+        .chat-message {
             margin-bottom: 10px;
+            padding: 8px;
+            background-color: #f1f1f1;
+            border-radius: 5px;
         }
 
         .input-container {
@@ -147,6 +139,24 @@
 
         #clear-button:hover {
             background-color: #FF1F1F;
+        }
+
+        /* Insights and Visualization */
+        .insights-container,
+        .visualization-container {
+            max-height: 400px; /* Limit height */
+            overflow-y: auto; /* Enable scrolling if needed */
+        }
+
+        .visualization-container img {
+            max-width: 100%; /* Ensure images scale to container width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        /* Reduce visualization size */
+        .visualization-container {
+            max-width: 80%; /* Smaller width for visualization container */
+            margin: 0 auto; /* Center container */
         }
 
         /* Responsive Design */
@@ -208,7 +218,9 @@
                 <!-- Chat Section -->
                 <div class="chat-container card">
                     <div class="chat-box-header">Chatbot</div>
-                    <div class="chat-box" id="chat-box"></div>
+                    <div class="chat-box" id="chat-box">
+                        <div class="chat-message">Welcome to the chatbot! How can I assist you?</div>
+                    </div>
                     <div class="input-container">
                         <input type="text" id="user-input" placeholder="Ask me anything...">
                         <button id="send-button">Send</button>
@@ -228,7 +240,9 @@
                 <!-- Visualizations Section -->
                 <div id="visualization-section" class="visualization-container card" style="display: none;">
                     <h4>Generated Visualizations</h4>
-                    <div id="visualization-images"></div>
+                    <div id="visualization-images">
+                        <img src="example-chart.png" alt="Example Visualization">
+                    </div>
                     <button id="download-button" class="btn btn-primary" style="margin-top: 10px;">Download Visualizations</button>
                 </div>
             </div>
