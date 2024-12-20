@@ -7,11 +7,75 @@
     <title>Data Analysis Chatbot</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
-        /* Navbar Styling (Unchanged) */
-        .navbar-default {
+.navbar-default {
             background-color: white !important;
             border-color: rgba(34, 34, 34, 0.5);
         }
+
+        .navbar-header .navbar-brand {
+            color: #EB5E28 !important;
+            font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            text-transform: uppercase !important;
+        }
+
+        .navbar-header .navbar-brand:hover,
+        .navbar-header .navbar-brand:focus {
+            color: #DC2F02 !important;
+        }
+
+        .nav > li > a {
+            color: #000000 !important;
+            font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            text-transform: uppercase !important;
+        }
+
+        .nav > li > a:hover,
+        .nav > li > a:focus {
+            color: #044DBA !important;
+        }
+
+        /* Additional styles for mobile menu */
+        .menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+                cursor: pointer;
+                font-size: 24px;
+                color: #EB5E28 !important;
+                font-weight: bold !important;
+                font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            }
+            .navbar-collapse {
+                display: none;
+            }
+            .navbar-collapse.show {
+                display: block;
+            }
+
+            /* Ensure the main container adjusts for smaller screens */
+            .col-lg-8 {
+                width: 100%;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            /* Heading and Subheading adjustments */
+            .site-heading h1 {
+                font-size: 20px !important;
+            }
+
+            .site-heading .subheading {
+                font-size: 14px !important;
+            }
+
 
         /* Main Layout */
         .main-wrapper {
