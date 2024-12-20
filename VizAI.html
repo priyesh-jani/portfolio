@@ -54,18 +54,20 @@
         }
 
         .insights-container {
-            flex: 1;
+            flex: none; /* Prevents flex from stretching */
             min-width: 300px;
+            width: 100%;
             order: 3;
             align-self: flex-start;
-            width: 100%;
+            margin-bottom: 1rem; /* Adds spacing between containers */
         }
-
+        
         .visualization-container {
-            flex: 1;
+            flex: none; /* Prevents flex from stretching */
             min-width: 300px;
-            order: 4;
             width: 100%;
+            order: 4;
+            margin-top: 0; /* Removes unnecessary space */
         }
 
         /* Card styling */
