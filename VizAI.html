@@ -15,10 +15,15 @@
             padding: 0;
         }
 
+        /* Adjust for fixed navigation overlap */
+        body {
+            padding-top: 60px; /* Matches navbar height */
+        }
+
         h1 {
             font-size: 2.5em;
             text-align: center;
-            margin-top: 20px;
+            margin: 20px 0;
         }
 
         p.highlight {
@@ -28,12 +33,19 @@
             color: #6c757d;
         }
 
+        /* Full viewport width */
+        .container {
+            max-width: 100%;
+            padding: 0 15px;
+        }
+
         /* Layout container */
         .main-wrapper {
             display: grid;
             grid-template-columns: 1fr 2fr; /* Left: 1fr, Right: 2fr */
             gap: 20px;
             margin-top: 30px;
+            width: 100%;
         }
 
         .upload-chat-wrapper {
@@ -49,11 +61,28 @@
         }
 
         .upload-section {
-            order: 1;
+            text-align: center; /* Center contents */
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .upload-section form {
+            width: 100%;
+            max-width: 300px;
         }
 
         .chat-container {
             order: 2;
+        }
+
+        .chat-box-header {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: bold;
         }
 
         .insights-container {
@@ -125,6 +154,10 @@
             .main-wrapper {
                 grid-template-columns: 1fr; /* Single-column layout */
             }
+
+            .container {
+                padding: 0;
+            }
         }
     </style>
 </head>
@@ -174,6 +207,7 @@
 
                 <!-- Chat Section -->
                 <div class="chat-container card">
+                    <div class="chat-box-header">Chatbot</div>
                     <div class="chat-box" id="chat-box"></div>
                     <div class="input-container">
                         <input type="text" id="user-input" placeholder="Ask me anything...">
