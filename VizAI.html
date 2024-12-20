@@ -35,8 +35,7 @@
         }
 
         .upload-section {
-            flex: 1;
-            min-width: 300px;
+            flex: 1 1 300px; /* Flex basis of 300px with flexibility */
             order: 1;
         }
 
@@ -47,27 +46,21 @@
         }
 
         .chat-container {
-            flex: 1;
-            min-width: 300px;
+            flex: 1 1 300px;
             order: 2;
             margin-top: 20px;
         }
 
-        .insights-container {
-            flex: none; /* Prevents flex from stretching */
-            min-width: 300px;
-            width: 100%;
+         .insights-container {
+            flex: 2 1 300px; /* Takes more space on desktop view */
             order: 3;
-            align-self: flex-start;
-            margin-bottom: 1rem; /* Adds spacing between containers */
+            margin-bottom: 1rem;
         }
         
         .visualization-container {
-            flex: none; /* Prevents flex from stretching */
-            min-width: 300px;
-            width: 100%;
+            flex: 2 1 300px;
             order: 4;
-            margin-top: 0; /* Removes unnecessary space */
+            margin-top: 0;
         }
 
         /* Card styling */
