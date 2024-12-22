@@ -7,40 +7,193 @@
     <title>Data Analysis Chatbot</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
+        /* Navbar Styling */
         .navbar-default {
             background-color: white !important;
             border-color: rgba(34, 34, 34, 0.5);
+            position: fixed; /* Ensure navbar stays fixed */
+            top: 0;
+            width: 100%;
+            z-index: 1000;
         }
-
+    
         .navbar-header .navbar-brand {
             color: #EB5E28 !important;
             font-weight: bold !important;
             font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
             text-transform: uppercase !important;
         }
-
+    
         .navbar-header .navbar-brand:hover,
         .navbar-header .navbar-brand:focus {
             color: #DC2F02 !important;
         }
-
+    
         .nav > li > a {
             color: #000000 !important;
             font-weight: bold !important;
             font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
             text-transform: uppercase !important;
         }
-
+    
         .nav > li > a:hover,
         .nav > li > a:focus {
             color: #044DBA !important;
         }
+    
+        .site-heading h1 {
+            font-size: 24px; /* Adjust font size */
+            font-weight: bold; /* Set font weight */
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif
+            margin-bottom: 0; /* Reduce space below the heading */
+        }
 
+        .site-heading .subheading {
+            font-size: 16px; /* Set font size for subheading */
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif
+            margin-top: 0; /* Remove space above the subheading */
+            margin-bottom: 0; /* Add some space below the subheading */
+            font-style: italic; /* Optional: Make subheading italic */
+        }
+    
+        /* Add space between the buttons in upload section */
+        .upload-section {
+            display: flex;
+            flex-direction: column;
+            gap: 50px; /* Adds spacing between buttons */
+        }
+    
+        .upload-section input[type="file"],
+        .upload-section button {
+            margin: 5px 0; /* Ensure no conflicting margins */
+        }
+    
         /* Additional styles for mobile menu */
         .menu-btn {
             display: none;
         }
 
+        .question-list, .chat-container {
+            margin-top: 0; /* Reduce the space between the subheading and the chat boxes */
+            padding-top: 10px; /* Optionally, adjust padding to fine-tune the space */
+        }  
+
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .chat-wrapper {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+        }
+
+
+        .chat-container {
+            flex: 1;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+            min-height: 350px;
+            height: auto; /* Allow it to grow as content is added */
+        }
+
+
+        .chat-box {
+            min-height: 300px; /* Default height for chatbox */
+            height: auto; /* Allows it to expand as messages are added */
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+        }
+
+        #user-input {
+            width: calc(100% - 90px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 5px;
+            box-sizing: border-box;
+        }
+
+        #send-button {
+            padding: 10px 15px;
+            background-color: #0066FF;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+        #send-button:hover {
+            background-color: #044DBA;
+        }
+
+        #clear-button {
+            padding: 12px;
+            background-color: #FF4C4C;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        #clear-button:hover {
+            background-color: #FF1F1F;
+            transform: scale(1.1); /* Slight grow effect */
+        }
+
+        #clear-button:focus {
+            outline: none;
+        }
+
+        .trash-icon {
+            font-size: 18px;
+            color: white;
+            background: url('https://cdn-icons-png.flaticon.com/512/1214/1214428.png') no-repeat center center;
+            background-size: contain;
+            width: 24px;
+            height: 24px;
+        }
+
+                /* Chat bubble style */
+        .chat-box div {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 15px;
+            max-width: 80%;
+            clear: both;
+        }
+
+        .user-msg {
+            background-color: #f0f0f0;
+            float: right;
+            text-align: right;
+        }
+
+        .chatbot-msg {
+            background-color: #CCCCCC;
+            float: left;
+            text-align: left;
+        }
+    
         @media (max-width: 768px) {
             .menu-btn {
                 display: block;
@@ -53,38 +206,37 @@
                 font-weight: bold !important;
                 font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
             }
+    
             .navbar-collapse {
                 display: none;
             }
+    
             .navbar-collapse.show {
                 display: block;
             }
-
+    
             /* Ensure the main container adjusts for smaller screens */
             .col-lg-8 {
                 width: 100%;
                 padding-left: 15px;
                 padding-right: 15px;
             }
-
-            /* Heading and Subheading adjustments */
-            .site-heading h1 {
-                font-size: 20px !important;
+    
+            /* Adjustments for h1 and h2 on mobile view */
+            .center-content {
+                height: auto; /* Allow more flexibility on smaller screens */
+                padding-top: 100px; /* Extra space for smaller screens */
             }
-
-            .site-heading .subheading {
-                font-size: 14px !important;
-            }
-
-
-        /* Main Layout */
-        .main-wrapper {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            margin-top: 80px;
         }
 
+                /* Card styling */
+        .card {
+            background-color: white;
+            padding: 60px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    
         .left-section,
         .right-section {
             flex: 1;
@@ -92,34 +244,27 @@
             flex-direction: column;
             gap: 20px;
         }
-
+    
         /* Left Section */
         .upload-chat-wrapper {
             display: flex;
             flex-direction: column;
             gap: 20px;
         }
-
+    
         /* Right Section */
         .insights-container,
         .visualization-container {
             flex: 1;
         }
-
-        /* Card Styling (Unchanged) */
-        .card {
-            background-color: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 20px;
-        }
-
+    
+    
         /* Chatbox Styling (Unchanged) */
         .chat-container {
             border-radius: 8px;
             overflow: hidden;
         }
-
+    
         /* Responsive Design */
         @media (max-width: 768px) {
             .main-wrapper {
@@ -127,9 +272,8 @@
             }
         }
     </style>
-</head>
-
-<body>
+    
+ <body>
     <!-- Navigation Bar -->
     <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
@@ -154,18 +298,29 @@
         </div>
     </nav>
 
+    <header class="intro-header" style="background-image: url('img/chat-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1>Analyze Your Data Like Never Before</h1>
+                        <hr class="small">
+                        <span class="subheading">Leverage the power of AI to transform your datasets into actionable insights and dynamic
+                            visualizations.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
     <!-- Main Content -->
     <div class="container">
-        <h1>Analyze Your Data Like Never Before</h1>
-        <p class="highlight">Leverage the power of AI to transform your datasets into actionable insights and dynamic
-            visualizations.</p>
-
         <!-- Main Wrapper -->
         <div class="main-wrapper">
             <!-- Left Section -->
             <div class="left-section">
                 <!-- Upload Section -->
-                <div class="upload-section card">
+                <div class="upload-section">
                     <form id="upload-form" enctype="multipart/form-data">
                         <label for="file-upload">Upload your CSV file:</label>
                         <input type="file" id="file-upload" name="file" required>
@@ -174,15 +329,12 @@
                 </div>
 
                 <!-- Chat Section -->
-                <div class="chat-container card">
-                    <div class="chat-box-header">Chatbot</div>
-                    <div class="chat-box" id="chat-box">
-                        <div class="chat-message">Welcome to the chatbot! How can I assist you?</div>
-                    </div>
+                <div class="chat-container">
+                    <div class="chat-box" id="chat-box"></div>
                     <div class="input-container">
-                        <input type="text" id="user-input" placeholder="Ask me anything...">
-                        <button id="send-button">Send</button>
-                        <button id="clear-button">Clear</button>
+                         <input type="text" id="user-input" placeholder="Ask me anything..">
+                         <button id="send-button">Send</button>
+                         <button id="clear-button"> <i class="trash-icon"></i></button>
                     </div>
                 </div>
             </div>
