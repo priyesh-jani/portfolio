@@ -273,6 +273,65 @@
             color: #044DBA;
         }
 
+        .custom-visualization {
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
+        .custom-visualization h4 {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #333333;
+        }
+        
+        .custom-visualization label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: block;
+            color: #555555;
+        }
+        
+        .custom-visualization select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            transition: border-color 0.3s;
+        }
+        
+        .custom-visualization select:focus {
+            outline: none;
+            border-color: #0066FF;
+            box-shadow: 0 0 6px rgba(0, 102, 255, 0.2);
+        }
+        
+        .custom-visualization .btn-primary {
+            background-color: #0066FF;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+        
+        .custom-visualization .btn-primary:hover {
+            background-color: #044DBA;
+            transform: translateY(-2px);
+        }
+
+
         @media (max-width: 768px) {
             .menu-btn {
                 display: block;
@@ -385,6 +444,20 @@
             <!-- Right Section -->
             <div class="right-section">
                 <!-- Insights Section -->
+
+                <div class="custom-visualization card">
+                    <h4>Custom Visualization</h4>
+                    <label for="chart-type">Choose a visualization:</label>
+                    <select id="chart-type" class="form-control">
+                        <option value="bar">Bar Chart</option>
+                        <option value="scatter">Scatter Plot</option>
+                        <option value="line">Line Chart</option>
+                        <option value="histogram">Histogram</option>
+                        <option value="box">Box Plot</option>
+                    </select>
+                    <button id="generate-chart" class="btn btn-primary" style="margin-top: 10px;">Generate Chart</button>
+                </div>
+
                 <div id="insights-section" class="insights-container card" style="display: none;">
                     <h4>Data Insights</h4>
                     <p id="insights-content"></p>
@@ -414,6 +487,9 @@
         const chatBox = document.getElementById("chat-box");
         const userInput = document.getElementById("user-input");
         const sendButton = document.getElementById("send-button");
+        const CHART_ENDPOINT = "http://127.0.0.1:5000/custom-chart";
+        const generateChartButton = document.getElementById("generate-chart");
+        const chartTypeSelector = document.getElementById("chart-type");
     
         let currentFileKey = null; // To store the file key for Q&A
     
@@ -507,6 +583,59 @@
                 chatBox.innerHTML += `<div><strong>Chatbot:</strong> Please upload a file first.</div>`;  
             }
         });
+
+
+        generateChartButton.addEventListener("click", async () => {
+            const selectedChart = chartTypeSelector.value;
+            if (!currentFileKey) {
+                alert("Please upload a file first.");
+                return;
+            }
+    
+            const requestData = {
+                file_name: currentFileKey,
+                chart_type: selectedChart
+            };
+    
+            try {
+                const response = await fetch(CHART_ENDPOINT, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(requestData),
+                    credentials: "include"
+                });
+    
+                if (response.ok) {
+                    const chartData = await response.json();
+                    const { chart } = chartData;
+    
+                    visualizationSection.style.display = "block";
+                    visualizationImages.innerHTML = "";
+    
+                    const img = document.createElement("img");
+                    img.src = `http://127.0.0.1:5000${chart.png}`;
+                    img.alt = "Custom Visualization";
+                    img.style.maxWidth = "100%";
+                    visualizationImages.appendChild(img);
+    
+                    const link = document.createElement("a");
+                    link.href = `http://127.0.0.1:5000${chart.html}`;
+                    link.textContent = "View Interactive Chart";
+                    link.target = "_blank";
+                    link.style.display = "block";
+                    link.style.marginTop = "10px";
+                    visualizationImages.appendChild(link);
+                } else {
+                    alert("Failed to generate chart.");
+                }
+            } catch (error) {
+                console.error("Error generating chart:", error);
+                alert("Error generating chart.");
+            }
+        });
+        
     </script>
 
 </body>
