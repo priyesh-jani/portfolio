@@ -255,7 +255,24 @@
             border-radius: 8px;
             overflow: hidden;
         }
-    
+
+        img {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        a {
+            font-size: 14px;
+            color: #0066FF;
+            text-decoration: underline;
+        }
+        
+        a:hover {
+            color: #044DBA;
+        }
+
         @media (max-width: 768px) {
             .menu-btn {
                 display: block;
@@ -421,28 +438,35 @@
                 if (response.ok) {
                     const data = await response.json();
                     const { insights, charts } = data;
-    
+                
                     // Display insights
-                    insightsContent.textContent = insights;
-    
+                    insightsContent.textContent = insights.summary;
+                
                     // Store the file key for Q&A
                     currentFileKey = formData.get("file").name;
-    
-                    // Display visualizations
+                
+                    // Display visualizations (PNG preview + HTML link)
                     visualizationSection.style.display = "block";
                     visualizationImages.innerHTML = "";
+                    
                     charts.forEach((chart) => {
                         const img = document.createElement("img");
-                        img.src = `http://127.0.0.1:5000/${chart}`;
+                        img.src = `http://127.0.0.1:5000${chart.png}`;  // Display PNG
+                        img.alt = "Visualization Preview";
+                        img.style.maxWidth = "100%";
                         visualizationImages.appendChild(img);
+                
+                        const link = document.createElement("a");
+                        link.href = `http://127.0.0.1:5000${chart.html}`;  // Link to HTML version
+                        link.textContent = "View Interactive Chart";
+                        link.target = "_blank";  // Open in new tab
+                        link.style.display = "block";
+                        link.style.marginTop = "10px";
+                        visualizationImages.appendChild(link);
                     });
                 } else {
                     insightsContent.textContent = "Error analyzing file.";
                 }
-            } catch (error) {
-                insightsContent.textContent = "An error occurred while analyzing the file.";
-                console.error("Error:", error);
-            }
         });
     
         // Handle user question submission
