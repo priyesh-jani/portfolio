@@ -7,6 +7,15 @@
     <title>Data Analysis Chatbot</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <style>
+
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;  /* Stack elements vertically */
+        }
+
         /* Navbar Styling */
         .navbar-default {
             background-color: white !important;
@@ -41,10 +50,6 @@
             color: #044DBA !important;
         }
 
-        .main-wrapper {
-            display: flex;  /* Enable flex layout for left & right sections */
-            gap: 30px;  /* Add spacing between the two sections */
-        }
     
         .site-heading h1 {
             font-size: 24px; /* Adjust font size */
@@ -57,15 +62,37 @@
             font-size: 16px; /* Set font size for subheading */
             font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif
             margin-top: 0; /* Remove space above the subheading */
-            margin-bottom: 0; /* Add some space below the subheading */
             font-style: italic; /* Optional: Make subheading italic */
+        }
+
+        .main-wrapper {
+            flex: 1;  /* Allow main-wrapper to fill available space */
+            display: flex;
+            flex-direction: row;
+            overflow: hidden;  /* Prevents any overflow */
+        }
+
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            height: 100%;  /* Inherit height from .main-wrapper */
+        }
+
+
+        .right-section {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
     
         /* Add space between the buttons in upload section */
         .upload-section {
             display: flex;
+            flex-shrink: 0;  /* Prevent upload section from shrinking */
             flex-direction: column;
             gap: 50px; /* Adds spacing between buttons */
+            margin-bottom: 5px;  /* Add space below upload section */
         }
     
         .upload-section input[type="file"],
@@ -97,21 +124,18 @@
 
         .chat-container {
             flex: 1;
+            display: flex;
+            flex-direction: column;
             padding: 20px;
             background-color: #ffffff;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             border-radius: 8px;
             position: relative;
-            overflow: hidden;
-            min-height: 350px;
-            height: auto; /* Allow it to grow as content is added */
         }
 
-
         .chat-box {
-            min-height: 300px; /* Default height for chatbox */
-            height: auto; /* Allows it to expand as messages are added */
-            overflow-y: auto;
+            min-height: 150px;  /* Minimum height to prevent shrinking */
+            max-height: calc(100vh - 150px);  /* Stays within viewport */
             border: 1px solid #ddd;
             border-radius: 4px;
             padding: 10px;
@@ -198,6 +222,34 @@
             float: left;
             text-align: left;
         }
+
+                /* Card styling */
+        .card {
+            background-color: white;
+            padding: 60px;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+    
+        /* Left Section */
+        .upload-chat-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+    
+        /* Right Section */
+        .insights-container,
+        .visualization-container {
+            flex: 1;
+        }
+    
+    
+        /* Chatbox Styling (Unchanged) */
+        .chat-container {
+            border-radius: 8px;
+            overflow: hidden;
+        }
     
         @media (max-width: 768px) {
             .menu-btn {
@@ -232,42 +284,6 @@
                 height: auto; /* Allow more flexibility on smaller screens */
                 padding-top: 100px; /* Extra space for smaller screens */
             }
-        }
-
-                /* Card styling */
-        .card {
-            background-color: white;
-            padding: 60px;
-            border-radius: 4px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-    
-        .left-section,
-        .right-section {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-    
-        /* Left Section */
-        .upload-chat-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-        }
-    
-        /* Right Section */
-        .insights-container,
-        .visualization-container {
-            flex: 1;
-        }
-    
-    
-        /* Chatbox Styling (Unchanged) */
-        .chat-container {
-            border-radius: 8px;
-            overflow: hidden;
         }
     
         /* Responsive Design */
