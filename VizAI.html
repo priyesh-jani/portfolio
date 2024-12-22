@@ -420,42 +420,42 @@
         // Handle file upload and analysis
         uploadForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-    
+        
             const formData = new FormData(uploadForm);
             insightsSection.style.display = "none";
             visualizationSection.style.display = "none";
-    
+        
             try {
                 insightsContent.textContent = "Analyzing data, please wait...";
                 insightsSection.style.display = "block";
-    
+        
                 const response = await fetch(UPLOAD_ENDPOINT, {
                     method: "POST",
                     body: formData,
                     credentials: "include",
                 });
-    
+        
                 if (response.ok) {
                     const data = await response.json();
                     const { insights, charts } = data;
-                
+        
                     // Display insights
                     insightsContent.textContent = insights.summary;
-                
+        
                     // Store the file key for Q&A
                     currentFileKey = formData.get("file").name;
-                
+        
                     // Display visualizations (PNG preview + HTML link)
                     visualizationSection.style.display = "block";
                     visualizationImages.innerHTML = "";
-                    
+        
                     charts.forEach((chart) => {
                         const img = document.createElement("img");
                         img.src = `http://127.0.0.1:5000${chart.png}`;  // Display PNG
                         img.alt = "Visualization Preview";
                         img.style.maxWidth = "100%";
                         visualizationImages.appendChild(img);
-                
+        
                         const link = document.createElement("a");
                         link.href = `http://127.0.0.1:5000${chart.html}`;  // Link to HTML version
                         link.textContent = "View Interactive Chart";
@@ -467,7 +467,12 @@
                 } else {
                     insightsContent.textContent = "Error analyzing file.";
                 }
+            } catch (error) {
+                insightsContent.textContent = "An error occurred while analyzing the file.";
+                console.error("Error:", error);
+            }
         });
+
     
         // Handle user question submission
         sendButton.addEventListener("click", async () => {
