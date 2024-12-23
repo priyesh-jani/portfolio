@@ -489,14 +489,41 @@
         const generateChartButton = document.getElementById("generate-chart");
         const chartTypeSelector = document.getElementById("chart-type");
         const customVisualizationSection = document.getElementById("custom-visualization");
-        const clearButton = document.getElementById('clear-button'); // New clear button
-        const columnSelector = document.createElement("select");
-        columnSelector.id = "column-selector";
-        columnSelector.className = "form-control";
-        columnSelector.multiple = true;  // Allow multi-column selection
-        let initialMessageTimeout;
-    
+        const clearButton = document.getElementById('clear-button');
+        let columnSelector;
+            
         let currentFileKey = null; // To store the file key for Q&A
+
+        function addColumnSelector() {
+            columnSelector = document.createElement("select");
+            columnSelector.id = "column-selector";
+            columnSelector.className = "form-control";
+            columnSelector.multiple = true;  // Allow multi-column selection
+            
+            const label = document.createElement("label");
+            label.textContent = "Select Columns (Optional)";
+            
+            const container = document.querySelector('.input-container');
+            container.insertBefore(label, userInput);
+            container.insertBefore(columnSelector, userInput);
+        }
+
+        function populateColumnSelector(columns) {
+            columnSelector.innerHTML = "";  // Clear previous options
+            
+            // Add 'Select All' option
+            const allOption = document.createElement("option");
+            allOption.value = "all";
+            allOption.textContent = "Select All";
+            columnSelector.appendChild(allOption);
+        
+            columns.forEach(col => {
+                const option = document.createElement("option");
+                option.value = col;
+                option.textContent = col;
+                columnSelector.appendChild(option);
+            });
+        }
     
         // Handle file upload and analysis
         uploadForm.addEventListener("submit", async (event) => {
@@ -521,7 +548,7 @@
                     const data = await response.json();
                     const { insights, charts, columns } = data;
         
-                    // Display insights
+                    // Display Insights
                     if (insights && insights.summary) {
                         insightsContent.textContent = insights.summary;
                     } else {
@@ -530,6 +557,11 @@
                     
                     // Store the file key for Q&A
                     currentFileKey = formData.get("file").name;
+        
+                    // Ensure column selector is added once
+                    if (!document.getElementById("column-selector")) {
+                        addColumnSelector();
+                    }
         
                     // Populate the column selector if columns exist
                     if (columns && columns.length > 0) {
@@ -562,7 +594,6 @@
                         insightsContent.textContent += "\nNo visualizations were generated.";
                     }
         
-                    // Show custom visualization section if charts are generated
                     if (charts.length > 0) {
                         customVisualizationSection.style.display = "block";
                     }
@@ -575,50 +606,19 @@
                 console.error("Error:", error);
             }
         });
-
-
-        function populateColumnSelector(columns) {
-            columnSelector.innerHTML = "";  // Clear previous options
-            columns.forEach(col => {
-                const option = document.createElement("option");
-                option.value = col;
-                option.textContent = col;
-                columnSelector.appendChild(option);
-            });
-        
-            const allOption = document.createElement("option");
-            allOption.value = "all";
-            allOption.textContent = "Select All";
-            columnSelector.insertBefore(allOption, columnSelector.firstChild);
-        }
-
-
-        function showInitialMessage() {
-            const initialMessageDiv = document.createElement('div');
-            initialMessageDiv.id = 'initial-message';
-            initialMessageDiv.classList.add('chatbot-msg');
-            initialMessageDiv.innerHTML = '<strong>Priyesh:</strong> Please wait at least 50 seconds for the first response. Thank you!';
-            chatBox.appendChild(initialMessageDiv);
-            chatBox.scrollTop = chatBox.scrollHeight;
-    
-            // Remove the initial message after 30 seconds
-            initialMessageTimeout = setTimeout(() => {
-                initialMessageDiv.remove();
-            }, 10000);
-        }
     
         // Handle user question submission
         sendButton.addEventListener("click", async () => {
             const question = userInput.value.trim();
-            const selectedColumn = document.getElementById("column-selector").value;
-        
+            const selectedColumns = Array.from(columnSelector.selectedOptions).map(opt => opt.value);
+            
             if (question && currentFileKey) {
                 chatBox.innerHTML += `<div class="user-msg"><strong>You:</strong> ${question}</div>`;
                 userInput.value = "";
         
                 const requestData = {
                     question: question,
-                    selected_columns: selectedColumn ? [selectedColumn] : null
+                    selected_columns: selectedColumns.length > 0 ? selectedColumns : null
                 };
                 
                 try {
@@ -649,13 +649,6 @@
                 chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Please upload and analyze a file first.</div>`;
             }
         });
-
-
-        function clearChat() {
-            chatBox.innerHTML = ''; // Clear chat box content
-            userInput.value = '';   // Clear user input field
-        }
-
 
         generateChartButton.addEventListener("click", async () => {
             const selectedChart = chartTypeSelector.value;
