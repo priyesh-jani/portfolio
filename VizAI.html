@@ -501,62 +501,81 @@
         // Handle file upload and analysis
         uploadForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-        
+            
             const formData = new FormData(uploadForm);
             insightsSection.style.display = "none";
             visualizationSection.style.display = "none";
             customVisualizationSection.style.display = "none";
-        
+            
             try {
                 insightsContent.textContent = "Analyzing data, please wait...";
                 insightsSection.style.display = "block";
-        
+                
                 const response = await fetch(UPLOAD_ENDPOINT, {
                     method: "POST",
                     body: formData,
                     credentials: "include",
                 });
-        
+                
                 if (response.ok) {
                     const data = await response.json();
-                    const { insights, charts } = data;
+                    const { insights, charts, columns } = data;
         
                     // Display insights
-                    insightsContent.textContent = insights.summary;
-        
+                    if (insights && insights.summary) {
+                        insightsContent.textContent = insights.summary;
+                    } else {
+                        insightsContent.textContent = "No insights available for this file.";
+                    }
+                    
                     // Store the file key for Q&A
                     currentFileKey = formData.get("file").name;
-
-                    populateColumnSelector(columns);
         
+                    // Populate the column selector if columns exist
+                    if (columns && columns.length > 0) {
+                        populateColumnSelector(columns);
+                    } else {
+                        console.warn("No columns returned from server.");
+                    }
+                    
                     // Display visualizations (PNG preview + HTML link)
-                    visualizationSection.style.display = "block";
-                    visualizationImages.innerHTML = "";
+                    if (charts && charts.length > 0) {
+                        visualizationSection.style.display = "block";
+                        visualizationImages.innerHTML = "";
         
-                    charts.forEach((chart) => {
-                        const img = document.createElement("img");
-                        img.src = `http://127.0.0.1:5000${chart.png}`;  // Display PNG
-                        img.alt = "Visualization Preview";
-                        img.style.maxWidth = "100%";
-                        visualizationImages.appendChild(img);
+                        charts.forEach((chart) => {
+                            const img = document.createElement("img");
+                            img.src = `http://127.0.0.1:5000${chart.png}`;  // Display PNG
+                            img.alt = "Visualization Preview";
+                            img.style.maxWidth = "100%";
+                            visualizationImages.appendChild(img);
         
-                        const link = document.createElement("a");
-                        link.href = `http://127.0.0.1:5000${chart.html}`;  // Link to HTML version
-                        link.textContent = "View Interactive Chart";
-                        link.target = "_blank";  // Open in new tab
-                        link.style.display = "block";
-                        link.style.marginTop = "10px";
-                        visualizationImages.appendChild(link);
-                    });
-                    customVisualizationSection.style.display = "block";
+                            const link = document.createElement("a");
+                            link.href = `http://127.0.0.1:5000${chart.html}`;  // Link to HTML version
+                            link.textContent = "View Interactive Chart";
+                            link.target = "_blank";  // Open in new tab
+                            link.style.display = "block";
+                            link.style.marginTop = "10px";
+                            visualizationImages.appendChild(link);
+                        });
+                    } else {
+                        insightsContent.textContent += "\nNo visualizations were generated.";
+                    }
+        
+                    // Show custom visualization section if charts are generated
+                    if (charts.length > 0) {
+                        customVisualizationSection.style.display = "block";
+                    }
                 } else {
-                    insightsContent.textContent = "Error analyzing file.";
+                    const errorMessage = await response.text();
+                    insightsContent.textContent = "Error analyzing file. " + errorMessage;
                 }
             } catch (error) {
                 insightsContent.textContent = "An error occurred while analyzing the file.";
                 console.error("Error:", error);
             }
         });
+
 
         function populateColumnSelector(columns) {
             columnSelector.innerHTML = "";  // Clear previous options
@@ -566,12 +585,13 @@
                 option.textContent = col;
                 columnSelector.appendChild(option);
             });
-            
+        
             const allOption = document.createElement("option");
             allOption.value = "all";
             allOption.textContent = "Select All";
             columnSelector.insertBefore(allOption, columnSelector.firstChild);
         }
+
 
         function showInitialMessage() {
             const initialMessageDiv = document.createElement('div');
