@@ -601,7 +601,6 @@
         
                 const requestData = {
                     question: question,
-                    file_name: currentFileKey,
                     selected_columns: selectedColumn ? [selectedColumn] : null
                 };
                 
@@ -614,7 +613,7 @@
                         body: JSON.stringify(requestData),
                         credentials: "include"
                     });
-                    
+        
                     if (response.ok) {
                         const data = await response.json();
                         const answer = data.answer;
@@ -622,7 +621,8 @@
                         chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> ${answer}</div>`;
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
-                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Error processing your question.</div>`;
+                        const errorMsg = await response.json();
+                        chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> ${errorMsg.error || "Failed to process."}</div>`;
                     }
                 } catch (error) {
                     chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> An error occurred.</div>`;
@@ -632,6 +632,7 @@
                 chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Please upload and analyze a file first.</div>`;
             }
         });
+
 
         function clearChat() {
             chatBox.innerHTML = ''; // Clear chat box content
