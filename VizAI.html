@@ -434,9 +434,6 @@
                 <div class="chat-container">
                     <div class="chat-box" id="chat-box"></div>
                     <div class="input-container">
-                        <select id="column-selector" class="form-control">
-                            <option value="">All Columns</option>
-                        </select>
                         <input type="text" id="user-input" placeholder="Ask me anything..">
                         <button id="send-button">Send</button>
                         <button id="clear-button"> <i class="trash-icon"></i></button>
@@ -480,7 +477,6 @@
     <script>
         const UPLOAD_ENDPOINT = "http://127.0.0.1:5000/upload";
         const ASK_ENDPOINT = "http://127.0.0.1:5000/ask";
-    
         const uploadForm = document.getElementById("upload-form");
         const visualizationSection = document.getElementById("visualization-section");
         const visualizationImages = document.getElementById("visualization-images");
@@ -494,6 +490,10 @@
         const chartTypeSelector = document.getElementById("chart-type");
         const customVisualizationSection = document.getElementById("custom-visualization");
         const clearButton = document.getElementById('clear-button'); // New clear button
+        const columnSelector = document.createElement("select");
+        columnSelector.id = "column-selector";
+        columnSelector.className = "form-control";
+        columnSelector.multiple = true;  // Allow multi-column selection
         let initialMessageTimeout;
     
         let currentFileKey = null; // To store the file key for Q&A
@@ -526,6 +526,8 @@
         
                     // Store the file key for Q&A
                     currentFileKey = formData.get("file").name;
+
+                    populateColumnSelector(columns);
         
                     // Display visualizations (PNG preview + HTML link)
                     visualizationSection.style.display = "block";
@@ -556,24 +558,19 @@
             }
         });
 
-        async function populateColumnDropdown() {
-            const response = await fetch(UPLOAD_ENDPOINT, {
-                method: "POST",
-                body: new FormData(uploadForm),
-                credentials: "include"
+        function populateColumnSelector(columns) {
+            columnSelector.innerHTML = "";  // Clear previous options
+            columns.forEach(col => {
+                const option = document.createElement("option");
+                option.value = col;
+                option.textContent = col;
+                columnSelector.appendChild(option);
             });
-        
-            if (response.ok) {
-                const data = await response.json();
-                const df = JSON.parse(sessionStorage.getItem('uploaded_data'));
-                const columns = Object.keys(df);
-        
-                const columnSelector = document.getElementById("column-selector");
-                columnSelector.innerHTML = '<option value="">All Columns</option>';
-                columns.forEach(col => {
-                    columnSelector.innerHTML += `<option value="${col}">${col}</option>`;
-                });
-            }
+            
+            const allOption = document.createElement("option");
+            allOption.value = "all";
+            allOption.textContent = "Select All";
+            columnSelector.insertBefore(allOption, columnSelector.firstChild);
         }
 
         function showInitialMessage() {
