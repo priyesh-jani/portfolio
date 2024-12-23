@@ -197,12 +197,12 @@
         }
 
         .trash-icon {
-            font-size: 18px;
+            font-size: 14px;
             color: white;
             background: url('https://cdn-icons-png.flaticon.com/512/1214/1214428.png') no-repeat center center;
             background-size: contain;
-            width: 24px;
-            height: 24px;
+            width: 16px;
+            height: 16px;
         }
 
                 /* Chat bubble style */
@@ -274,11 +274,11 @@
         }
 
         .custom-visualization {
-            padding: 30px;
+            padding: 8px;
             background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            margin-top: 20px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-top: 5px;
             display: flex;
             flex-direction: column;
             align-items: flex-start;
@@ -286,15 +286,15 @@
         }
         
         .custom-visualization h4 {
-            font-size: 20px;
+            font-size: 15px;
             font-weight: bold;
-            margin-bottom: 15px;
+            margin-bottom: 8px;
             color: #333333;
         }
         
         .custom-visualization label {
-            font-weight: 500;
-            margin-bottom: 8px;
+            font-weight: 100;
+            margin-bottom: 2px;
             display: block;
             color: #555555;
         }
@@ -302,10 +302,10 @@
         .custom-visualization select {
             width: 100%;
             padding: 10px;
-            font-size: 16px;
+            font-size: 12px;
             border: 1px solid #ccc;
             border-radius: 4px;
-            margin-bottom: 15px;
+            margin-bottom: 2px;
             transition: border-color 0.3s;
         }
         
@@ -319,8 +319,8 @@
             background-color: #0066FF;
             color: white;
             border: none;
-            padding: 12px 20px;
-            font-size: 16px;
+            padding: 8px 12px;
+            font-size: 12px;
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s ease, transform 0.2s;
@@ -445,9 +445,13 @@
             <div class="right-section">
                 <!-- Insights Section -->
 
-                <div class="custom-visualization card">
-                    <h4>Custom Visualization</h4>
-                    <label for="chart-type">Choose a visualization:</label>
+                <div id="insights-section" class="insights-container card" style="display: none;">
+                    <h4>Data Insights</h4>
+                    <p id="insights-content"></p>
+                </div>
+
+                <div class="custom-visualization card" style="display: none;" id="custom-visualization">
+                    <h4>Generate any other Chart!</h4>
                     <select id="chart-type" class="form-control">
                         <option value="bar">Bar Chart</option>
                         <option value="scatter">Scatter Plot</option>
@@ -455,12 +459,7 @@
                         <option value="histogram">Histogram</option>
                         <option value="box">Box Plot</option>
                     </select>
-                    <button id="generate-chart" class="btn btn-primary" style="margin-top: 10px;">Generate Chart</button>
-                </div>
-
-                <div id="insights-section" class="insights-container card" style="display: none;">
-                    <h4>Data Insights</h4>
-                    <p id="insights-content"></p>
+                    <button id="generate-chart" class="btn btn-primary" style="margin-top: 5px;">Generate Chart</button>
                 </div>
 
                 <!-- Visualizations Section -->
@@ -490,6 +489,7 @@
         const CHART_ENDPOINT = "http://127.0.0.1:5000/custom-chart";
         const generateChartButton = document.getElementById("generate-chart");
         const chartTypeSelector = document.getElementById("chart-type");
+        const customVisualizationSection = document.getElementById("custom-visualization");
     
         let currentFileKey = null; // To store the file key for Q&A
     
@@ -500,6 +500,7 @@
             const formData = new FormData(uploadForm);
             insightsSection.style.display = "none";
             visualizationSection.style.display = "none";
+            customVisualizationSection.style.display = "none";
         
             try {
                 insightsContent.textContent = "Analyzing data, please wait...";
@@ -540,6 +541,7 @@
                         link.style.marginTop = "10px";
                         visualizationImages.appendChild(link);
                     });
+                    customVisualizationSection.style.display = "block";
                 } else {
                     insightsContent.textContent = "Error analyzing file.";
                 }
