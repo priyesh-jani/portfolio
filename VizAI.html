@@ -434,9 +434,12 @@
                 <div class="chat-container">
                     <div class="chat-box" id="chat-box"></div>
                     <div class="input-container">
-                         <input type="text" id="user-input" placeholder="Ask me anything..">
-                         <button id="send-button">Send</button>
-                         <button id="clear-button"> <i class="trash-icon"></i></button>
+                        <select id="column-selector" class="form-control">
+                            <option value="">All Columns</option>
+                        </select>
+                        <input type="text" id="user-input" placeholder="Ask me anything..">
+                        <button id="send-button">Send</button>
+                        <button id="clear-button"> <i class="trash-icon"></i></button>
                     </div>
                 </div>
             </div>
@@ -490,6 +493,8 @@
         const generateChartButton = document.getElementById("generate-chart");
         const chartTypeSelector = document.getElementById("chart-type");
         const customVisualizationSection = document.getElementById("custom-visualization");
+        const clearButton = document.getElementById('clear-button'); // New clear button
+        let initialMessageTimeout;
     
         let currentFileKey = null; // To store the file key for Q&A
     
@@ -551,18 +556,53 @@
             }
         });
 
+        async function populateColumnDropdown() {
+            const response = await fetch(UPLOAD_ENDPOINT, {
+                method: "POST",
+                body: new FormData(uploadForm),
+                credentials: "include"
+            });
+        
+            if (response.ok) {
+                const data = await response.json();
+                const df = JSON.parse(sessionStorage.getItem('uploaded_data'));
+                const columns = Object.keys(df);
+        
+                const columnSelector = document.getElementById("column-selector");
+                columnSelector.innerHTML = '<option value="">All Columns</option>';
+                columns.forEach(col => {
+                    columnSelector.innerHTML += `<option value="${col}">${col}</option>`;
+                });
+            }
+        }
+
+        function showInitialMessage() {
+            const initialMessageDiv = document.createElement('div');
+            initialMessageDiv.id = 'initial-message';
+            initialMessageDiv.classList.add('chatbot-msg');
+            initialMessageDiv.innerHTML = '<strong>Priyesh:</strong> Please wait at least 50 seconds for the first response. Thank you!';
+            chatBox.appendChild(initialMessageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+    
+            // Remove the initial message after 30 seconds
+            initialMessageTimeout = setTimeout(() => {
+                initialMessageDiv.remove();
+            }, 10000);
+        }
     
         // Handle user question submission
-// Handle user question submission
         sendButton.addEventListener("click", async () => {
             const question = userInput.value.trim();
+            const selectedColumn = document.getElementById("column-selector").value;
+        
             if (question && currentFileKey) {
                 chatBox.innerHTML += `<div class="user-msg"><strong>You:</strong> ${question}</div>`;
                 userInput.value = "";
-                
+        
                 const requestData = {
                     question: question,
-                    file_name: currentFileKey
+                    file_name: currentFileKey,
+                    selected_columns: selectedColumn ? [selectedColumn] : null
                 };
                 
                 try {
@@ -593,6 +633,10 @@
             }
         });
 
+        function clearChat() {
+            chatBox.innerHTML = ''; // Clear chat box content
+            userInput.value = '';   // Clear user input field
+        }
 
 
         generateChartButton.addEventListener("click", async () => {
