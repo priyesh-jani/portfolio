@@ -607,25 +607,22 @@
             }
         });
     
-        // Handle user question submission
         sendButton.addEventListener("click", async () => {
             const question = userInput.value.trim();
-            const selectedColumns = Array.from(columnSelector.selectedOptions).map(opt => opt.value);
-            
+        
             if (question && currentFileKey) {
                 chatBox.innerHTML += `<div class="user-msg"><strong>You:</strong> ${question}</div>`;
                 userInput.value = "";
         
                 const requestData = {
-                    question: question,
-                    selected_columns: selectedColumns.length > 0 ? selectedColumns : null
+                    question: question
                 };
-                
+        
                 try {
                     const response = await fetch(ASK_ENDPOINT, {
                         method: "POST",
                         headers: {
-                            "Content-Type": "application/json",
+                            "Content-Type": "application/json"
                         },
                         body: JSON.stringify(requestData),
                         credentials: "include"
@@ -634,7 +631,7 @@
                     if (response.ok) {
                         const data = await response.json();
                         const answer = data.answer;
-                        
+        
                         chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> ${answer}</div>`;
                         chatBox.scrollTop = chatBox.scrollHeight;
                     } else {
@@ -649,6 +646,7 @@
                 chatBox.innerHTML += `<div class="chatbot-msg"><strong>Chatbot:</strong> Please upload and analyze a file first.</div>`;
             }
         });
+
 
         generateChartButton.addEventListener("click", async () => {
             const selectedChart = chartTypeSelector.value;
