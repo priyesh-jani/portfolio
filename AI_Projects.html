@@ -42,6 +42,55 @@
             display: none;
         }
 
+        .project-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+        
+        .project-card {
+            width: 45%;
+            background-color: #f9fafc;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        .project-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .preview {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .preview img {
+            width: 70%;
+            margin-bottom: 10px;
+        }
+        
+        .project-card:hover .preview {
+            opacity: 1;
+        }
+
+
         @media (max-width: 768px) {
             .menu-btn {
                 display: block;
@@ -157,34 +206,43 @@
     </header>
     <!-- Main Content -->
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <div class="post-preview">
-                    <a href="Chatbot.html">
-                        <h2 class="post-title">
-                            A look into my Professional Journey
-                        </h2>
-                        <h3 class="post-subtitle">
-                            Why Crafting Your Narrative is Essential for Career Success and Opportunities
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by Priyesh Jani on June 18, 2024</p>
-                </div>
-                <hr>
-                <div class="post-preview">
-                    <a href="VizAI.html">
-                        <h2 class="post-title">
-                            Visualize your data and Ask Questions!!
-                        </h2>
-                        <h3 class="post-subtitle">
-                            
-                        </h3>
-                    </a>
-                    <p class="post-meta">Posted by Priyesh Jani on July 7, 2024</p>
-                </div>
-                <hr>
-                <!-- Add more blog posts here -->
+        <div class="row project-container">
+
+        <div class="project-card">
+            <div class="post-preview">
+                <a href="Chatbot.html">
+                    <h2 class="post-title">
+                        A look into my Professional Journey
+                    </h2>
+                    <h3 class="post-subtitle">
+                        Why Crafting Your Narrative is Essential for Career Success and Opportunities
+                    </h3>
+                </a>
+                <p class="post-meta">Posted by Priyesh Jani on June 18, 2024</p>
             </div>
+            <div class="preview">
+                <img src="img/preview1.jpg" alt="Preview 1">
+                <p>Explore the professional journey insights!</p>
+            </div>
+        </div>
+        
+        <div class="project-card">
+            <div class="post-preview">
+                <a href="VizAI.html">
+                    <h2 class="post-title">
+                        Visualize your data and Ask Questions!!
+                    </h2>
+                </a>
+                <p class="post-meta">Posted by Priyesh Jani on July 7, 2024</p>
+            </div>
+            <div class="preview">
+                <img src="img/preview2.jpg" alt="Preview 2">
+                <p>Learn data visualization techniques!</p>
+            </div>
+        </div>
+
+
+
         </div>
     </div>
 
