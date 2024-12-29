@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>AI - Priyesh Jani</title>
+    <!--<link rel="stylesheet" href="css/main.css">--> <!-- Ensure this line is included -->
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style>
+        /* Ensure consistent navbar styles */
+        .navbar-default {
+            background-color: white !important;
+            border-color: rgba(34, 34, 34, 0.5);
+        }
+
+        .navbar-header .navbar-brand {
+            color: #EB5E28 !important;
+            font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            text-transform: uppercase !important;
+        }
+
+        .navbar-header .navbar-brand:hover,
+        .navbar-header .navbar-brand:focus {
+            color: #DC2F02 !important;
+        }
+
+        .nav > li > a {
+            color: #000000 !important;
+            font-weight: bold !important;
+            font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            text-transform: uppercase !important;
+        }
+
+        .nav > li > a:hover,
+        .nav > li > a:focus {
+            color: #044DBA !important;
+        }
+
+        /* Additional styles for mobile menu */
+        .menu-btn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .menu-btn {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 15px;
+                cursor: pointer;
+                font-size: 24px;
+                color: #EB5E28 !important;
+                font-weight: bold !important;
+                font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif !important;
+            }
+            .navbar-collapse {
+                display: none;
+            }
+            .navbar-collapse.show {
+                display: block;
+            }
+
+            /* Ensure the main container adjusts for smaller screens */
+            .col-lg-8 {
+                width: 100%;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+
+            /* Heading and Subheading adjustments */
+            .site-heading h1 {
+                font-size: 20px !important;
+            }
+
+            .site-heading .subheading {
+                font-size: 14px !important;
+            }
+
+            .post-title h2 {
+                font-size: 14px !important;
+            }
+
+            .post-subtitle h3 {
+                font-size: 12px !important;
+            }
+
+            /* Footer adjustments for mobile */
+            footer {
+                padding: 10px;
+                text-align: center;
+            }
+
+            footer p {
+                font-size: 12px;
+            }
+
+            /* Image Responsiveness */
+            .intro-header {
+                background-size: cover;
+                background-position: center center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand page-scroll" href="index.html">Priyesh Jani</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a class="page-scroll" href="blogs.html">BLOGS</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="AI_Projects.html">AI-PROJECTS</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#services">SERVICES</a>
+                    </li>
+                    <li>
+                        <a class="page-scroll" href="index.html#contact">CONTACT</a>
+                    </li>
+                </ul>
+                <div class="menu-btn">
+                    <i class="fas fa-bars"></i>
+                </div>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- Header -->
+    <header class="intro-header" style="background-image: url('img/blog-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="site-heading">
+                        <h1 style="font-size: 24px;">AI Projects</h1>
+                        <hr class="small">
+                        <span class="subheading" style="margin-bottom: 10px;"></span> <!-- Adjusted margin -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Main Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-preview">
+                    <a href="personalbranding.html">
+                        <h2 class="post-title">
+                            A look into my Professional Journey
+                        </h2>
+                        <h3 class="post-subtitle">
+                            Why Crafting Your Narrative is Essential for Career Success and Opportunities
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by Priyesh Jani on June 18, 2024</p>
+                </div>
+                <hr>
+                <div class="post-preview">
+                    <a href="linkedinInfluencer.html">
+                        <h2 class="post-title">
+                            Visualize your data and Ask Questions!!
+                        </h2>
+                        <h3 class="post-subtitle">
+                            
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by Priyesh Jani on July 7, 2024</p>
+                </div>
+                <hr>
+                <!-- Add more blog posts here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; Priyesh Jani 2024. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <!-- Scripts -->
+    <!--<script src="js/jquery.min.js"></script>-->
+    <!--<script src="js/bootstrap.min.js"></script>-->
+    <!--<script src="js/scripts.js"></script>-->
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+    <script src="js/jquery.fittext.js"></script>
+    <script src="js/wow.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="js/creative.js"></script>
+
+    <script>
+        // JavaScript to toggle the mobile menu
+        document.querySelector('.menu-btn').addEventListener('click', function() {
+            document.querySelector('.navbar-collapse').classList.toggle('show');
+        });
+    </script>
+</body>
+</html>
