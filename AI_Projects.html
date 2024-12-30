@@ -42,14 +42,6 @@
             display: none;
         }
 
-        .project-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-top: 40px;
-        }
-        
         .project-card {
             width: 45%;
             background-color: #f9fafc;
@@ -57,37 +49,90 @@
             border-radius: 8px;
             overflow: hidden;
             position: relative;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;  /* Remove underline on the link */
+            transition: background-color 0.3s ease;  /* Smooth hover effect */
         }
-        
+
         .project-card:hover {
-            transform: scale(1.05);
+            background-color: rgba(0, 0, 0, 0.7);  /* Dark grey overlay on hover */
+            cursor: pointer;
         }
-        
-        .preview {
+
+        .project-card:hover .post-title {
+            color: #EB5E28;  /* Highlight title on hover */
+        }
+
+        .card-link {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
+            z-index: 10;
+            pointer-events: none;  /* Prevents blocking hover */
+        }
+
+        .project-card:hover .card-link {
+            pointer-events: auto;  /* Enable clicking on hover */
+        }
+
+        .preview {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview img {
+            width: 100%;  /* Makes image fill container */
+            height: auto; /* Keeps image proportions */
+        }
+
+        .post-title {
+            width: 100%;
+            background-color: #000;  /* Black background */
+            color: white;
+            text-align: center;
+            padding: 15px 0;
+            margin: 0;
+            font-size: 16px;
+            font-weight: bold;
+            position: static;  /* Important - Ensures title is below the image */
+        }
+
+        /* Ensure Flexbox Layout for Alignment */
+        .project-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .project-card-wrapper {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-        
-        .preview img {
-            width: 70%;
-            margin-bottom: 10px;
         }
         
         .project-card:hover .preview {
             opacity: 1;
+        }
+
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            flex: 1;
         }
 
 
@@ -205,47 +250,27 @@
         </div>
     </header>
     <!-- Main Content -->
+
     <div class="container">
         <div class="row project-container">
-
-        <div class="project-card">
-            <div class="post-preview">
-                <a href="Chatbot.html">
-                    <h2 class="post-title">
-                        A look into my Professional Journey
-                    </h2>
-                    <h3 class="post-subtitle">
-                        Why Crafting Your Narrative is Essential for Career Success and Opportunities
-                    </h3>
-                </a>
-                <p class="post-meta">Posted by Priyesh Jani on June 18, 2024</p>
-            </div>
-            <div class="preview">
-                <img src="img/preview1.jpg" alt="Preview 1">
-                <p>Explore the professional journey insights!</p>
-            </div>
-        </div>
-        
-        <div class="project-card">
-            <div class="post-preview">
-                <a href="VizAI.html">
-                    <h2 class="post-title">
-                        Visualize your data and Ask Questions!!
-                    </h2>
-                </a>
-                <p class="post-meta">Posted by Priyesh Jani on July 7, 2024</p>
-            </div>
-            <div class="preview">
-                <img src="img/preview2.jpg" alt="Preview 2">
-                <p>Learn data visualization techniques!</p>
-            </div>
-        </div>
-
-
-
+    
+            <a href="Chatbot.html" class="project-card">  <!-- Wrap card in link -->
+                <div class="preview">
+                    <img src="img/preview1.jpg" alt="Preview 1">
+                </div>
+                <h2 class="post-title">A look into my Professional Journey</h2>
+            </a>
+            
+            <a href="VizAI.html" class="project-card">
+                <div class="preview">
+                    <img src="img/preview2.jpg" alt="Preview 2">
+                </div>
+                <h2 class="post-title">Visualize your data and Ask Questions!!</h2>
+            </a>
+    
         </div>
     </div>
-
+    
     <!-- Footer -->
     <footer>
         <div class="container">
